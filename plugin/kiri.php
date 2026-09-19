@@ -1,958 +1,587 @@
 <?php
 global $koneksi_db, $maxkonten;
-$perintah="SELECT * FROM mod_data_profil";
-$hasil = $koneksi_db->sql_query( $perintah );
-$coint_i = 0;
-while ($data = $koneksi_db->sql_fetchrow($hasil)) {
-    $coint_i++;
-    $id = md5($data['id']);
-    
-    echo '   
-<div class="gdlr-core-pbf-wrapper " style="padding: 10px 0px 10px 0px;" >
-<div class="gdlr-core-pbf-background-wrap" style="background-color: #d63a1c ;"  ></div>
-<div class="gdlr-core-pbf-wrapper-content gdlr-core-js "   ><div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-pbf-wrapper-full-no-space" >
-<div class="gdlr-core-pbf-element" ><div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-center-align gdlr-core-title-item-caption-bottom gdlr-core-item-pdlr" style="padding-bottom: 0px ;"  >
-<div class="gdlr-core-title-item-title-wrap clearfix" ><marquee class="gdlr-core-title-item-title gdlr-core-skin-title " style="font-size: 20px ;color: #302b60 ;text-transform:uppercase;"  >'.$data['nama'].'</marquee>
-</div><span class="gdlr-core-title-item-caption gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 15px ;font-style: normal ;color: #302b60 ;margin-top: 0px ;"  >'.$data['alamat'].'</span>
-</div>
-</div>
-</div>
-</div>
-</div>
 
-<p style="text-align: center;"></p>
-<div class="progress">
+// 1. Ticker / Profil Singkat
+$perintah_profil = "SELECT * FROM mod_data_profil LIMIT 1";
+$hasil_profil = $koneksi_db->sql_query($perintah_profil);
+while ($data_profil = $koneksi_db->sql_fetchrow($hasil_profil)) {
+?>
+<!-- Ticker Pengumuman Flat -->
+<div style="background: #073529; color: #ecfdf5; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08);">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 10px; flex: 1; min-width: 280px;">
+            <span style="background: #c89a3b; color: #073529; font-weight: 800; font-size: 11px; padding: 3px 8px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">
+                PENGUMUMAN
+            </span>
+            <div style="font-size: 13px; font-weight: 500; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                <?= htmlspecialchars($data_profil['nama']); ?> &bull; <?= htmlspecialchars($data_profil['slogan'] ?? 'Penerimaan Mahasiswa Baru'); ?>
+            </div>
+        </div>
+        <div style="font-size: 12px; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
+            <i class="fa fa-map-marker" style="color: #c89a3b;"></i>
+            <span><?= htmlspecialchars($data_profil['alamat']); ?></span>
+        </div>
+    </div>
 </div>
-'; 
-} ?>
+<?php } ?>
 
-<!-- CSS ANIMASI UNTUK MENU LAYANAN -->
 <style>
-    /* Service Menu Animation Styles */
-    .service-menu-section .gdlr-core-column-15 {
-        transition: all 0.4s ease;
-        position: relative;
-        overflow: hidden;
-        padding: 0 10px;
+/* CSS Flat Modern untuk Seluruh Komponen Beranda */
+.pmb-section {
+    padding: 60px 0;
+    position: relative;
+}
+
+.pmb-section-alt {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Service Grid Flat */
+.service-grid-flat {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 991px) {
+    .service-grid-flat {
+        grid-template-columns: repeat(2, 1fr);
     }
+}
 
-    .service-menu-section .gdlr-core-column-15:hover {
-        transform: translateY(-10px);
+@media (max-width: 575px) {
+    .service-grid-flat {
+        grid-template-columns: 1fr;
     }
+}
 
-    .service-menu-section .service-box {
-        background: linear-gradient(135deg, #1a53ff 0%, #0d3dd9 100%);
-        border-radius: 8px;
-        overflow: hidden;
-        position: relative;
-        height: 250px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 30px 20px;
-        box-shadow: 0 4px 15px rgba(26, 83, 255, 0.3);
-        transition: all 0.4s ease;
+.service-card-flat {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 30px 20px;
+    text-align: center;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    text-decoration: none !important;
+}
+
+.service-card-flat:hover {
+    border-color: #0b4d3c;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(11, 77, 60, 0.08);
+}
+
+.service-card-flat .icon-box {
+    width: 60px;
+    height: 60px;
+    background: #ecfdf5;
+    border: 1px solid #d1fae5;
+    color: #0b4d3c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 16px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.service-card-flat:hover .icon-box {
+    background: #0b4d3c;
+    color: #ffffff;
+}
+
+.service-card-flat h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+}
+
+/* CTA Heroic Section */
+.cta-banner-flat {
+    background: #0b4d3c;
+    color: #ffffff;
+    padding: 50px 30px;
+    border: 1px solid #073529;
+    text-align: center;
+    position: relative;
+    margin-top: 30px;
+}
+
+.cta-banner-flat h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.cta-banner-flat p {
+    font-size: 15px;
+    color: #ecfdf5;
+    max-width: 650px;
+    margin: 0 auto 24px auto;
+}
+
+.btn-cta-main {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #c89a3b;
+    color: #073529 !important;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 16px 40px;
+    border: none;
+    border-radius: 0px;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+}
+
+.btn-cta-main:hover {
+    background: #e5b349;
+    color: #000000 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+/* Social Grid Flat */
+.social-grid-flat {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+}
+
+@media (max-width: 991px) {
+    .social-grid-flat {
+        grid-template-columns: repeat(3, 1fr);
     }
+}
 
-    .service-menu-section .gdlr-core-column-15:hover .service-box {
-        box-shadow: 0 15px 30px rgba(26, 83, 255, 0.5);
+@media (max-width: 575px) {
+    .social-grid-flat {
+        grid-template-columns: repeat(2, 1fr);
     }
+}
 
-    /* Efek shine/cahaya */
-    .service-menu-section .gdlr-core-column-15::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: rgba(255, 255, 255, 0.1);
-        transform: rotate(45deg);
-        transition: all 0.5s ease;
-        opacity: 0;
-        z-index: 1;
+.social-card-flat {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 24px 15px;
+    text-align: center;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-card-flat:hover {
+    border-color: #0f172a;
+    background: #0f172a;
+    transform: translateY(-3px);
+}
+
+.social-card-flat i {
+    font-size: 28px;
+    color: #0b4d3c;
+    transition: color 0.2s ease;
+}
+
+.social-card-flat strong {
+    font-size: 12px;
+    font-weight: 700;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.2s ease;
+}
+
+.social-card-flat:hover i,
+.social-card-flat:hover strong {
+    color: #ffffff;
+}
+
+/* News Cards Flat */
+.news-grid-flat {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+@media (max-width: 991px) {
+    .news-grid-flat {
+        grid-template-columns: 1fr;
     }
+}
 
-    .service-menu-section .gdlr-core-column-15:hover::before {
-        opacity: 1;
-        left: 100%;
-    }
+.news-card-flat {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
 
-    .service-menu-section .service-icon {
-        text-align: center;
-        margin-bottom: 20px;
-        position: relative;
-        z-index: 2;
-    }
+.news-card-flat:hover {
+    border-color: #0b4d3c;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+}
 
-    .service-menu-section .service-icon i {
-        color: white;
-        font-size: 84px;
-        transition: all 0.4s ease;
-        display: inline-block;
-        animation: fadeInDown 0.6s ease;
-    }
+.news-card-thumb {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: #e2e8f0;
+    overflow: hidden;
+}
 
-    .service-menu-section .gdlr-core-column-15:hover .service-icon i {
-        animation: bounce 0.6s ease;
-        transform: scale(1.1) rotate(5deg);
-    }
+.news-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
 
-    .service-menu-section .service-title {
-        text-align: center;
-        position: relative;
-        z-index: 2;
-    }
+.news-card-flat:hover .news-card-thumb img {
+    transform: scale(1.04);
+}
 
-    .service-menu-section .service-title h3 {
-        font-size: 15px;
-        letter-spacing: 0px;
-        text-transform: uppercase;
-        color: #ffffff;
-        margin: 0;
-        font-weight: bold;
-        transition: all 0.3s ease;
-    }
+.news-card-body {
+    padding: 24px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-    .service-menu-section .service-title a {
-        color: #ffffff;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
+.news-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #94a3b8;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
 
-    .service-menu-section .gdlr-core-column-15:hover .service-title h3 {
-        transform: translateX(5px);
-    }
+.news-card-title {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: #0f172a;
+    margin-bottom: 12px;
+    text-decoration: none !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 
-    /* Animasi keyframes */
-    @keyframes fadeInDown {
-        from {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
+.news-card-title:hover {
+    color: #0b4d3c;
+}
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+.news-read-more {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0b4d3c;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    text-decoration: none !important;
+}
 
-    @keyframes bounce {
+.news-read-more:hover {
+    color: #c89a3b;
+}
 
-        0%,
-        100% {
-            transform: translateY(0);
-        }
+/* FAQ & Video Flat */
+.faq-item-flat {
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    margin-bottom: 12px;
+}
 
-        50% {
-            transform: translateY(-10px);
-        }
-    }
+.faq-header-flat {
+    padding: 16px 20px;
+    font-weight: 700;
+    font-size: 15px;
+    color: #0f172a;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    transition: background 0.2s ease, color 0.2s ease;
+    user-select: none;
+}
 
-    /* Fade In Animation untuk saat load */
-    .service-menu-section .gdlr-core-column-15 {
-        animation: fadeInUp 0.6s ease backwards;
-    }
+.faq-header-flat:hover {
+    background: #f8fafc;
+    color: #0b4d3c;
+}
 
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
+.faq-header-flat.active {
+    background: #ecfdf5;
+    color: #0b4d3c;
+    border-bottom: 1px solid #d1fae5;
+}
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+.faq-body-flat {
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #475569;
+    display: none;
+    background: #ffffff;
+}
 
-    /* Stagger animation delay untuk setiap item */
-    .service-menu-section .gdlr-core-column-15:nth-child(1) {
-        animation-delay: 0.1s;
-    }
+.faq-body-flat.open {
+    display: block;
+}
 
-    .service-menu-section .gdlr-core-column-15:nth-child(2) {
-        animation-delay: 0.2s;
-    }
+.video-container-flat {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    background: #0f172a;
+    border: 1px solid #e2e8f0;
+}
 
-    .service-menu-section .gdlr-core-column-15:nth-child(3) {
-        animation-delay: 0.3s;
-    }
-
-    .service-menu-section .gdlr-core-column-15:nth-child(4) {
-        animation-delay: 0.4s;
-    }
-
-    .service-menu-section .gdlr-core-column-15:nth-child(5) {
-        animation-delay: 0.5s;
-    }
-
-    .service-menu-section .gdlr-core-column-15:nth-child(6) {
-        animation-delay: 0.6s;
-    }
-
-    .service-menu-section .gdlr-core-column-15:nth-child(7) {
-        animation-delay: 0.7s;
-    }
-
-    .service-menu-section .gdlr-core-column-15:nth-child(8) {
-        animation-delay: 0.8s;
-    }
-
-    .service-menu-section .gdlr-core-column-15:nth-child(9) {
-        animation-delay: 0.9s;
-    }
-
-    .service-menu-section .gdlr-core-column-15:nth-child(10) {
-        animation-delay: 1s;
-    }
-
-    .service-menu-section .gdlr-core-column-15:nth-child(11) {
-        animation-delay: 1.1s;
-    }
-
-    .service-menu-section .gdlr-core-column-15:nth-child(12) {
-        animation-delay: 1.2s;
-    }
+.video-container-flat iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
 </style>
 
-<!-- MENU LAYANAN DENGAN ANIMASI -->
-<div class="gdlr-core-pbf-wrapper service-menu-section" style="margin: 30px 30px 0px 30px;padding: 20px 0px 0px 0px;">
-    <div class="gdlr-core-pbf-background-wrap"></div>
-    <div class="gdlr-core-pbf-wrapper-content gdlr-core-js">
-        <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container">
-            <div class="row">
-                <?php
-            $perintah = "SELECT * FROM mod_data_layanan ORDER By id DESC LIMIT 12";
-            $hasil = $koneksi_db->sql_query($perintah);
-            $coint_i = 0;
-            while ($data = $koneksi_db->sql_fetchrow($hasil)) {
-                $coint_i++;
-                $url = str_replace(" ", "-", $data[1]);
-                
-                echo '
-                <div class="col-sm-4 col-md-3 gdlr-core-column-15" style="margin-bottom: 20px;">
-                    <div class="service-box">
-                        <div class="service-icon">
-                            <a href="'.$data['link'].'" target="_self">
-                                <i class="fa fa-'.$data['icon'].'"></i>
-                            </a>
-                        </div>
-                        <div class="service-title">
-                            <h3>
-                                <a href="'.$data['link'].'" target="_self">'.$data['nama'].'</a>
-                            </h3>
-                        </div>
-                    </div>
-                </div>';
-            }
+<!-- SECTION 1: LAYANAN PMB (QUICK ACCESS) -->
+<section class="pmb-section">
+    <div class="container">
+        <div class="section-header-flat">
+            <span class="badge-tag">Portal Pendaftaran</span>
+            <h2>Layanan Utama PMB</h2>
+            <p>Akses cepat ke seluruh menu informasi dan administrasi pendaftaran mahasiswa baru</p>
+        </div>
+
+        <div class="service-grid-flat">
+            <?php
+            $perintah_layanan = "SELECT * FROM mod_data_layanan ORDER By id ASC LIMIT 8";
+            $hasil_layanan = $koneksi_db->sql_query($perintah_layanan);
+            while ($data_layanan = $koneksi_db->sql_fetchrow($hasil_layanan)) {
+                $icon = !empty($data_layanan['icon']) ? $data_layanan['icon'] : 'check-circle';
             ?>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="gdlr-core-pbf-wrapper " style="padding: 0px 0px 0px 0px;">
-    <div class="gdlr-core-pbf-background-wrap">
-    </div>
-    <!-- BAGIAN TOMBOL DAFTAR SEKARANG - ELEGANT VERSION -->
-    <style>
-        /* Register Button Section */
-        .register-section {
-            padding: 60px 0;
-            background: #ffffff;
-            text-align: center;
-        }
-
-        .register-button, .know-more {
-            display: inline-block;
-            padding: 18px 60px;
-            background: #109bc5;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border-radius: 0;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            border: 2px solid #109bc5;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .register-button::before, .know-more::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: #ffffff;
-            transition: all 0.4s ease;
-            z-index: 0;
-        }
-
-        .register-button:hover::before, .know-more:hover::before {
-            left: 0;
-        }
-
-        .register-button:hover, .know-more:hover {
-            color: #109bc5;
-            background: #0d7a9d;
-            border-color: #0d7a9d;
-            text-decoration: none;
-        }
-
-        .register-button strong, .know-more strong {
-            position: relative;
-            z-index: 1;
-        }
-    </style>
-
-    <div class="register-section">
-        <a href="https://iaipibdg.sevimaplatform.com/spmbfront/" target="_blank" rel="noopener" class="register-button">
-            <strong>Daftar Sekarang</strong>
-        </a>
-    </div>
-
-    <!-- CSS untuk Social Media Section - ELEGANT VERSION -->
-    <style>
-        /* Social Media Section Styles */
-        .social-media-section {
-            padding: 100px 0 80px 0;
-            background: #fafafa;
-        }
-
-        .social-media-section .section-title {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-
-        .social-media-section .section-title h2 {
-            font-size: 38px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .social-media-section .section-title h2::before {
-            content: '';
-            display: block;
-            font-size: 14px;
-            font-weight: 400;
-            color: #109bc5;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 8px;
-        }
-
-        .social-media-section .section-title p {
-            color: #109bc5;
-            font-size: 14px;
-            font-weight: 400;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 0;
-        }
-
-        /* Social Media Item */
-        .social-items-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            flex-wrap: wrap;
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .social-item {
-            opacity: 0;
-            animation: elegantFadeIn 0.8s ease forwards;
-            flex: 0 0 auto;
-            width: 170px;
-        }
-
-        /* Stagger animation untuk setiap item */
-        .social-item:nth-child(1) {
-            animation-delay: 0.05s;
-        }
-
-        .social-item:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-
-        .social-item:nth-child(3) {
-            animation-delay: 0.15s;
-        }
-
-        .social-item:nth-child(4) {
-            animation-delay: 0.2s;
-        }
-
-        .social-item:nth-child(5) {
-            animation-delay: 0.25s;
-        }
-
-        .social-item:nth-child(6) {
-            animation-delay: 0.3s;
-        }
-
-        .social-item:nth-child(7) {
-            animation-delay: 0.35s;
-        }
-
-        .social-item:nth-child(8) {
-            animation-delay: 0.4s;
-        }
-
-        .social-item:nth-child(9) {
-            animation-delay: 0.45s;
-        }
-
-        .social-item:nth-child(10) {
-            animation-delay: 0.5s;
-        }
-
-        .social-item:nth-child(11) {
-            animation-delay: 0.55s;
-        }
-
-        .social-item:nth-child(12) {
-            animation-delay: 0.6s;
-        }
-
-        .social-box {
-            background: #ffffff;
-            padding: 45px 20px;
-            text-align: center;
-            position: relative;
-            overflow: visible;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            height: 100%;
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-        }
-
-        .social-box:hover {
-            border-color: #1a1a1a;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transform: translateY(-10px);
-        }
-
-        /* Icon styling - ELEGANT */
-        .social-icon {
-            position: relative;
-            z-index: 2;
-            margin-bottom: 20px;
-            transition: all 0.5s ease;
-        }
-
-        .social-icon i {
-            font-size: 50px;
-            color: #1a1a1a;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            display: inline-block;
-        }
-
-        .social-box:hover .social-icon {
-            transform: translateY(-5px);
-        }
-
-        .social-box:hover .social-icon i {
-            transform: scale(1.1);
-        }
-
-        /* Title styling - MINIMALIST */
-        .social-title {
-            position: relative;
-            z-index: 2;
-            transition: all 0.4s ease;
-        }
-
-        .social-title a {
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .social-title strong {
-            color: #666;
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            transition: all 0.4s ease;
-            display: block;
-        }
-
-        .social-box:hover .social-title strong {
-            color: #1a1a1a;
-            letter-spacing: 2px;
-        }
-
-        /* Animasi keyframes - SUBTLE */
-        @keyframes elegantFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .social-media-section {
-                padding: 70px 0 50px 0;
-            }
-
-            .social-media-section .section-title {
-                margin-bottom: 50px;
-            }
-
-            .social-items-wrapper {
-                gap: 20px;
-            }
-
-            .social-item {
-                width: 140px;
-            }
-
-            .social-box {
-                height: 150px;
-                padding: 35px 15px;
-            }
-
-            .social-icon i {
-                font-size: 42px;
-            }
-
-            .social-title strong {
-                font-size: 10px;
-            }
-
-            .social-media-section .section-title h2 {
-                font-size: 28px;
-                letter-spacing: 2px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .register-button {
-                padding: 16px 40px;
-                font-size: 12px;
-            }
-
-            .social-items-wrapper {
-                gap: 15px;
-            }
-
-            .social-item {
-                width: 120px;
-            }
-        }
-    </style>
-
-    <!-- HTML Structure - ULTRA CLEAN & ELEGANT -->
-    <div class="social-media-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Connect With Us</h2>
-                <p>Follow our social media for latest updates</p>
-            </div>
+            <a href="<?= htmlspecialchars($data_layanan['link']); ?>" class="service-card-flat">
+                <div class="icon-box">
+                    <i class="fa fa-<?= htmlspecialchars($icon); ?>"></i>
+                </div>
+                <h3><?= htmlspecialchars($data_layanan['nama']); ?></h3>
+            </a>
+            <?php } ?>
         </div>
 
+        <!-- HEROIC CTA BANNER -->
+        <div class="cta-banner-flat">
+            <h2>Penerimaan Mahasiswa Baru Telah Dibuka</h2>
+            <p>Segera bergabung bersama Institut Agama Islam Persatuan Islam Bandung. Wujudkan masa depan gemilang dengan pendidikan berkualitas berlandaskan nilai-nilai Islam.</p>
+            <a href="https://iaipibdg.sevimaplatform.com/spmbfront/" target="_blank" rel="noopener" class="btn-cta-main">
+                <i class="fa fa-user-plus"></i> DAFTAR SEKARANG
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 2: SOCIAL MEDIA CHANNELS -->
+<section class="pmb-section pmb-section-alt">
+    <div class="container">
+        <div class="section-header-flat">
+            <span class="badge-tag">Konektivitas</span>
+            <h2>Media & Informasi Resmi</h2>
+            <p>Ikuti akun media sosial resmi kami untuk mendapatkan informasi terkini dan pengumuman seleksi</p>
+        </div>
+
+        <div class="social-grid-flat">
+            <?php
+            $perintah_social = "SELECT * FROM mod_data_layanan2 ORDER By id ASC LIMIT 6";
+            $hasil_social = $koneksi_db->sql_query($perintah_social);
+            while ($data_soc = $koneksi_db->sql_fetchrow($hasil_social)) {
+                $soc_icon = $data_soc['icon'];
+                // Handle tiktok / video icon cleanly
+                if ($soc_icon === 'tiktok' || $soc_icon === 'fa-tiktok') {
+                    $soc_icon = 'play-circle';
+                }
+            ?>
+            <a href="<?= htmlspecialchars($data_soc['link']); ?>" target="_blank" rel="noopener" class="social-card-flat">
+                <i class="fa fa-<?= htmlspecialchars($soc_icon); ?>"></i>
+                <strong><?= htmlspecialchars($data_soc['nama']); ?></strong>
+            </a>
+            <?php } ?>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 3: BERITA & PENGUMUMAN KAMPUS -->
+<section class="pmb-section">
+    <div class="container">
+        <div class="section-header-flat">
+            <span class="badge-tag">Update & Agenda</span>
+            <h2>Berita dan Informasi Seputar PMB</h2>
+            <p>Dapatkan berita terbaru seputar kegiatan kampus, alur seleksi, dan pengumuman penting</p>
+        </div>
+
+        <div class="news-grid-flat">
+            <?php
+            $query_berita = $koneksi_db->sql_query("SELECT * FROM `artikel` WHERE publikasi=1 ORDER BY `id` DESC LIMIT 3");
+            while ($data_berita = $koneksi_db->sql_fetchrow($query_berita)) {
+                $url_slug = str_replace(" ", "-", $data_berita['judul']);
+                $url_slug = preg_replace('/[^A-Za-z0-9\-]/', '', $url_slug);
+                $url_slug = preg_replace('/-+/', '-', $url_slug);
+                $url_slug = trim($url_slug, '-');
+                if (empty($url_slug)) {
+                    $url_slug = 'artikel-'.$data_berita['id'];
+                }
+
+                $img_src = 'images/berita-kampus-placeholder.jpg';
+                if (!empty($data_berita['gambar']) && file_exists('images/artikel/'.$data_berita['gambar'])) {
+                    $img_src = 'images/artikel/'.$data_berita['gambar'];
+                }
+            ?>
+            <div class="news-card-flat">
+                <div class="news-card-thumb">
+                    <img src="<?= htmlspecialchars($img_src); ?>" alt="<?= htmlspecialchars($data_berita['judul']); ?>">
+                </div>
+                <div class="news-card-body">
+                    <div>
+                        <div class="news-card-meta">
+                            <span><i class="fa fa-calendar-o"></i> <?= datetimess($data_berita['tgl']); ?></span>
+                            <span><i class="fa fa-eye"></i> <?= $data_berita['hits']; ?> Views</span>
+                        </div>
+                        <a href="artikel/<?= $data_berita['id']; ?>/<?= $url_slug; ?>.html" class="news-card-title">
+                            <?= htmlspecialchars($data_berita['judul']); ?>
+                        </a>
+                    </div>
+                    <a href="artikel/<?= $data_berita['id']; ?>/<?= $url_slug; ?>.html" class="news-read-more">
+                        Baca Selengkapnya <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <?php } ?>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="kategori/1/Berita-Kampus.html" class="btn-flat btn-flat-primary" style="padding: 14px 36px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">
+                Lihat Semua Berita <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 4: FAQ & VIDEO PROFIL -->
+<section class="pmb-section pmb-section-alt">
+    <div class="container">
         <div class="row">
-            <div class="social-items-wrapper">
-                <div class="social-items-wrapper">
+            <!-- Kolom FAQ -->
+            <div class="col-md-7 col-sm-12" style="margin-bottom: 30px;">
+                <div style="margin-bottom: 25px;">
+                    <span class="badge-tag" style="background: #ecfdf5; color: #0b4d3c; font-size: 11px; font-weight: 700; padding: 3px 10px; border: 1px solid #d1fae5; text-transform: uppercase;">Bantuan & Tanya Jawab</span>
+                    <h3 style="font-size: 24px; font-weight: 800; color: #0f172a; margin-top: 8px; text-transform: uppercase;">Pertanyaan Seputar PMB</h3>
+                </div>
+
+                <div class="faq-accordion-container">
                     <?php
-            $perintah="SELECT * FROM mod_data_layanan2 ORDER By id DESC LIMIT 12";
-            $hasil = $koneksi_db->sql_query($perintah);
-            $coint_i = 0;
-            while ($data = $koneksi_db->sql_fetchrow($hasil)) {
-                $coint_i++;
-                $url = str_replace(" ", "-", $data[1]);
-                
-                echo '
-                <div class="social-item">
-                    <div class="social-box">
-                        <div class="social-icon">
-                            <a href="'.$data['link'].'" target="_blank">
-                                <i class="fa fa-'.$data['icon'].'"></i>
-                            </a>
+                    $perintah_faq = "SELECT * FROM mod_data_faq ORDER By id ASC LIMIT 5";
+                    $hasil_faq = $koneksi_db->sql_query($perintah_faq);
+                    $faq_count = 0;
+                    while ($data_faq = $koneksi_db->sql_fetchrow($hasil_faq)) {
+                        $faq_count++;
+                        $is_first = ($faq_count === 1);
+                    ?>
+                    <div class="faq-item-flat">
+                        <div class="faq-header-flat <?= $is_first ? 'active' : ''; ?>" onclick="toggleFaq(this)">
+                            <span><?= htmlspecialchars($data_faq['nama']); ?></span>
+                            <i class="fa fa-<?= $is_first ? 'minus' : 'plus'; ?>"></i>
                         </div>
-                        <div class="social-title">
-                            <a href="'.$data['link'].'" target="_blank">
-                                <strong>'.$data['nama'].'</strong>
-                            </a>
+                        <div class="faq-body-flat <?= $is_first ? 'open' : ''; ?>">
+                            <?= $data_faq['ket']; ?>
                         </div>
                     </div>
-                </div>';
-            }
-            ?>
+                    <?php } ?>
+                </div>
+            </div>
+
+            <!-- Kolom Video -->
+            <div class="col-md-5 col-sm-12">
+                <div style="margin-bottom: 25px;">
+                    <span class="badge-tag" style="background: #ecfdf5; color: #0b4d3c; font-size: 11px; font-weight: 700; padding: 3px 10px; border: 1px solid #d1fae5; text-transform: uppercase;">Video Informasi</span>
+                    <h3 style="font-size: 24px; font-weight: 800; color: #0f172a; margin-top: 8px; text-transform: uppercase;">Profil & Panduan</h3>
+                </div>
+
+                <div class="video-container-flat">
+                    <?php
+                    $perintah_video = "SELECT * FROM mod_data_video ORDER By id DESC LIMIT 1";
+                    $hasil_video = $koneksi_db->sql_query($perintah_video);
+                    while ($data_video = $koneksi_db->sql_fetchrow($hasil_video)) {
+                    ?>
+                    <iframe src="https://www.youtube.com/embed/<?= htmlspecialchars($data_video['video']); ?>?rel=0" allowfullscreen></iframe>
+                    <?php } ?>
+                </div>
+                <div style="background: #ffffff; border: 1px solid #e2e8f0; border-top: none; padding: 16px 20px;">
+                    <div style="font-size: 13px; font-weight: 600; color: #0f172a;">
+                        <i class="fa fa-youtube-play" style="color: #ef4444; margin-right: 6px;"></i> Saksikan Video Panduan PMB & Profil Kampus
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Start Campus News Section - BERITA KAMPUS -->
-    <style>
-        .news-events {
-            padding: 60px 0;
-            background-color: #f5f5f5;
-        }
+</section>
 
-        .news-events h2 {
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 36px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
+<script>
+function toggleFaq(elem) {
+    var body = elem.nextElementSibling;
+    var icon = elem.querySelector('i');
+    var isOpen = body.classList.contains('open');
 
-        .news-events h2 span {
-            display: block;
-            font-size: 16px;
-            font-weight: normal;
-            color: #109bc5;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
+    // Close all other faqs in container
+    var container = elem.closest('.faq-accordion-container');
+    var allHeaders = container.querySelectorAll('.faq-header-flat');
+    var allBodies = container.querySelectorAll('.faq-body-flat');
 
-        .cs-style-3 {
-            list-style: none;
-            padding: 0;
-            margin: 50px 0 0 0;
-        }
-
-        .cs-style-3 li {
-            margin-bottom: 30px;
-        }
-
-        .cs-style-3 .inner {
-            position: relative;
-            overflow: hidden;
-            border-radius: 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            background: #fff;
-        }
-
-        .cs-style-3 .inner:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .cs-style-3 figure {
-            margin: 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cs-style-3 figure img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            object-position: center;
-            transition: transform 0.3s ease;
-        }
-
-        .cs-style-3 .inner:hover figure img {
-            transform: scale(1.05);
-        }
-
-        .cs-style-3 figcaption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
-            padding: 25px;
-            transform: translateY(100%);
-            transition: transform 0.4s ease;
-        }
-
-        .cs-style-3 .inner:hover figcaption {
-            transform: translateY(0);
-        }
-
-        .cs-style-3 figcaption h3 {
-            color: #2c3e50;
-            font-size: 18px;
-            margin: 0 0 15px 0;
-            line-height: 1.4;
-            font-weight: 600;
-        }
-
-        .cs-style-3 figcaption h3:before {
-            content: "🎯 ";
-            margin-right: 5px;
-        }
-
-        .cs-style-3 figcaption a {
-            color: #2c3e50;
-            text-decoration: none;
-        }
-
-        .cs-style-3 figcaption a:hover h3 {
-            color: #109bc5;
-        }
-
-        .cs-style-3 .plus-icon {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: #109bc5;
-            color: white;
-            text-align: center;
-            line-height: 50px;
-            font-size: 28px;
-            border-radius: 50%;
-            text-decoration: none;
-            z-index: 10;
-            box-shadow: 0 4px 10px rgba(16, 155, 197, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .cs-style-3 .plus-icon:hover {
-            background: #0d7a9d;
-            transform: rotate(90deg) scale(1.1);
-        }
-
-        .cs-style-3 .bottom-block {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #e0e0e0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cs-style-3 .date,
-        .cs-style-3 .comment {
-            display: inline-flex;
-            align-items: center;
-            font-size: 13px;
-            color: #666;
-        }
-
-        .cs-style-3 .date .icon,
-        .cs-style-3 .comment .icon {
-            margin-right: 5px;
-        }
-
-        .know-more-wrapper {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        /* Hilangkan border-radius dan shadow pada .know-more agar seragam dengan .register-button */
-        .know-more {
-            border-radius: 0;
-            font-weight: 500;
-            letter-spacing: 2px;
-            font-size: 14px;
-            box-shadow: none;
-            padding: 18px 60px;
-        }
-    </style>
-    <section class="news-events padding-lg">
-        <div class="container">
-            <h2><span>Berita dan Informasi Seputar</span>PCMB dan KAMPUS</h2>
-            <ul class="row cs-style-3">
-                <?php
-            $query2 = $koneksi_db->sql_query("SELECT * FROM `artikel` WHERE publikasi=1 AND topik=1 ORDER BY `id` DESC LIMIT 3");
-            while ($data = $koneksi_db->sql_fetchrow($query2)) {
-                $id2 = $data[0];
-                $judul2 = $data[1];
-                $gambar = $data['gambar'];
-                $post = $data[2];
-                
-                // Buat URL yang lebih aman dan bersih
-                $url = str_replace(" ", "-", $data[1]);
-                $url = preg_replace('/[^A-Za-z0-9\-]/', '', $url);
-                $url = preg_replace('/-+/', '-', $url);
-                $url = trim($url, '-');
-                
-                if (empty($url)) {
-                    $url = 'artikel-'.$data[0];
-                }
-                
-                $idzz = $data['id'];
-                $topik = $data['topik'];
-                $adaxc = $koneksi_db->sql_numrows($koneksi_db->sql_query("SELECT * FROM komentar where artikel='".$idzz."'"));
-                $propinsi4 = $koneksi_db->sql_query("SELECT * FROM topik WHERE id='$topik'");
-                while($p4 = $koneksi_db->sql_fetchrow($propinsi4)){
-                    $kelas24 = $p4['topik'];
-                }
-                
-                // Logika penentuan gambar
-                if (!empty($gambar)) {
-                    $image_src = 'images/artikel/'.$gambar;
-                } else {
-                    $na = catch_that_image($post);
-                    
-                    if (!empty($na) && 
-                        strpos($na, 'images/') !== false && 
-                        (strpos($na, '.jpg') !== false || strpos($na, '.jpeg') !== false || strpos($na, '.png') !== false)) {
-                        $image_src = $na;
-                    } else {
-                        $image_src = 'images/berita-kampus-placeholder.jpg';
-                    }
-                }
-                
-                echo '
-                <li class="col-sm-4">
-                    <div class="inner">
-                        <figure>
-                            <a href="artikel/'.$data[0].'/'.$url.'.html" title="'.htmlspecialchars($data[1]).'" class="plus-icon">+</a>
-                            <img src="'.$image_src.'" class="img-responsive" alt="'.htmlspecialchars($data[1]).'">
-                            <figcaption>
-                                <div class="cnt-block">
-                                    <a href="artikel/'.$data[0].'/'.$url.'.html" title="'.htmlspecialchars($data[1]).'">
-                                        <h3>'.htmlspecialchars($data[1]).'</h3>
-                                    </a>
-                                    <div class="bottom-block clearfix">
-                                        <div class="date">
-                                            <div class="icon"><span class="icon-calander-icon"></span></div>
-                                            <span>'.datetimess($data[5]).'</span>
-                                        </div>
-                                        <div class="comment">
-                                            <span>'.$data['hits'].'</span> View
-                                        </div>
-                                    </div>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </li>';
-            }
-            ?>
-            </ul>
-            <div class="know-more-wrapper" style="position:relative;z-index:20;">
-                <a href="kategori/1/Berita-Kampus.html" class="know-more" style="position:relative;z-index:30;">
-                <strong>Berita Kampus Lainnya</strong> <span class="icon-more-icon"></span>
-                </a>
-            </div>
-        </div>
-    </section>
-    <!-- End Campus News Section -->
-    <div class="gdlr-core-pbf-wrapper " style="padding: 0px 0px 0px 0px;">
-        <div class="gdlr-core-pbf-background-wrap" style="background-color: #808080 ;"></div>
-        <div class="gdlr-core-pbf-wrapper-content gdlr-core-js ">
-            <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-pbf-wrapper-full">
-                <div class="gdlr-core-pbf-column gdlr-core-column-30 gdlr-core-column-first">
-
-                    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js " style="padding: 30px 0px 0px 0px;">
-                        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js ">
-
-                            <div class="gdlr-core-pbf-element">
-                                <div
-                                    class="gdlr-core-image-item gdlr-core-item-pdlr gdlr-core-item-pdb  gdlr-core-right">
-                                    <div class="gdlr-core-image-item-wrap gdlr-core-media-image  gdlr-core-image-item-style-rectangle"
-                                        style="border-width: 0px;margin-left:30px;">
-
-                                        <div class="gdlr-core-pbf-element">
-                                            <div class="gdlr-core-blog-item gdlr-core-item-pdb clearfix  gdlr-core-style-blog-list"
-                                                style="padding-bottom: 10px ;">
-
-                                                <div class="gdlr-core-block-item-title-wrap  gdlr-core-left-align gdlr-core-item-mglr"
-                                                    style="margin-bottom: 5px ;">
-                                                    <div class="gdlr-core-block-item-title-inner clearfix">
-                                                        <h3 class="gdlr-core-block-item-title"
-                                                            style="font-size: 24px ;font-style: normal ;text-transform: none ;color: #163269 ;">
-                                                            Pertanyaan Seputar PCMB<br /><br /></h3>
-                                                        <div class="gdlr-core-block-item-title-divider"
-                                                            style="font-size: 24px ;border-bottom-width: 3px ;"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    class="gdlr-core-accordion-item gdlr-core-item-mglr gdlr-core-item-mgb  gdlr-core-accordion-style-background-title-icon gdlr-core-left-align gdlr-core-icon-pos-right gdlr-core-allow-close-all">
-
-                                                    <?php
-$perintah="SELECT * FROM mod_data_faq ORDER By rand() LIMIT 5";
-$hasil = $koneksi_db->sql_query( $perintah );
-$coint_ixx = 0;
-while ($data = $koneksi_db->sql_fetchrow($hasil)) {
-    $coint_ixx++;
-    $url=str_replace(" ", "-", $data[1]);
-    
-    if($coint_ixx==1) {
-        $show = 'show';
-    } else {
-        $show = '';
+    for (var i = 0; i < allHeaders.length; i++) {
+        allHeaders[i].classList.remove('active');
+        allHeaders[i].querySelector('i').className = 'fa fa-plus';
+        allBodies[i].classList.remove('open');
     }
-    
-    echo '
-<div class="gdlr-core-accordion-item-tab clearfix "><div  class="gdlr-core-accordion-item-icon gdlr-core-js gdlr-core-skin-icon " ></div>
 
-<div class="gdlr-core-accordion-item-content-wrapper" ><h5 class="gdlr-core-accordion-item-title gdlr-core-js  gdlr-core-skin-e-background gdlr-core-skin-e-content"   style="padding:12px;">'.$data['nama'].'</h5>
-<div class="gdlr-core-accordion-item-content" style="padding:12px;"><p>'.$data['ket'].'</p>
-</div>
-
-</div>
-
-</div>
-'; 
-} ?>
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="gdlr-core-pbf-column gdlr-core-column-30">
-                    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js "
-                        style="margin: 10px 40px 0px 40px;padding: 20px 0px 0px 0px;">
-                        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js ">
-
-                            <div class="gdlr-core-pbf-element">
-                                <div class="gdlr-core-video-item gdlr-core-item-pdlr gdlr-core-item-pdb "
-                                    style="padding-bottom: 10px ;">
-                                    <div class="gdlr-core-video-item-type-youtube">
-                                        <?php
-$perintah="SELECT * FROM mod_data_video ORDER By id DESC LIMIT 1";
-$hasil = $koneksi_db->sql_query( $perintah );
-$coint_ix = 0;
-while ($data = $koneksi_db->sql_fetchrow($hasil)) {
-    $coint_ix++;
-	
-    echo '
-<iframe
-src="https://www.youtube.com/embed/'.$data['video'].'" width="100%" height="315">
-</iframe>
-'; 
-} ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    if (!isOpen) {
+        elem.classList.add('active');
+        icon.className = 'fa fa-minus';
+        body.classList.add('open');
+    }
+}
+</script>

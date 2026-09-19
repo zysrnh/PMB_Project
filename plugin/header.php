@@ -1,41 +1,12 @@
 
 
-
-		
-			<?php
-$perintah="SELECT * FROM slider ORDER By id DESC LIMIT 1";
-$hasil = $koneksi_db->sql_query( $perintah );
-$coint_i = 0;
+<?php
+$perintah = "SELECT * FROM slider ORDER By id DESC LIMIT 1";
+$hasil = $koneksi_db->sql_query($perintah);
 while ($data = $koneksi_db->sql_fetchrow($hasil)) {
-				$coint_i++;
-				
-				if($coint_i==1)
-				{
-					$aktifs = 'active';
-				} else {
-					
-					$aktifs = '';
-				}
-			
- echo '
-
-
-
-<img src="images/slides/'.$data['foto'].'" alt="'.$data['nama'].'"  width="1920" height="766" data-lazyload="images/slides/'.$data['foto'].'" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
-	
-
-
-
-
-
- 
-
-
-  ';
- 
- 
- 
-
-					
-} ?>	                 
-		
+    echo '
+    <div style="width: 100%; background: #073529; overflow: hidden; max-height: 520px; display: flex; align-items: center; justify-content: center;">
+        <img src="images/slides/'.$data['foto'].'" alt="'.$data['nama'].'" style="width: 100%; height: auto; max-height: 520px; object-fit: cover; object-position: center;">
+    </div>';
+}
+?>

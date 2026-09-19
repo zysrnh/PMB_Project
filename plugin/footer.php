@@ -29,291 +29,109 @@
 
 
 
+
 			<?php
 global $koneksi_db, $maxkonten;
 $perintah="SELECT * FROM mod_data_profil";
 $hasil = $koneksi_db->sql_query( $perintah );
 $coint_i = 0;
 while ($data = $koneksi_db->sql_fetchrow($hasil)) {
-				$coint_i++;
-				$id = md5($data['id']);
-				
- echo '    
-
-
-
-<footer>
-
-<div class="kingster-footer-wrapper " style="background:'.$data['warnaf'].';">
-<div class="kingster-footer-container kingster-container clearfix" >
-
-
-
-<div class="kingster-footer-column kingster-item-pdlr kingster-column-20" style="margin-bottom:30px;"><div id="text-38" class="widget widget_text kingster-widget">
-<h3 class="kingster-widget-title">Tentang Kami</h3><span class="clear"></span>			
-<div class="textwidget"><p>'.$data['desc'].'<br/><ul style="margin-left:16px;">
-												<li><a style="color:white;"><i class="fa fa-map-marker"></i> '.$data['alamat'].'</a></li>
-												<li><a style="color:white;"><i class="fa fa-phone"></i> '.$data['telp'].'</a></li>
-												<li><a style="color:white;"><i class="fa fa-envelope-open-o"></i> '.$data['email'].'</a></li>
-												<li><a style="color:white;"><i class="fa fa-clock-o"></i> '.$data['slogan'].'</a></li>
-												
-                                               </ul></p>
-
-</div>
-		</div>
-</div>
-
-
-
-<div class="kingster-footer-column kingster-item-pdlr kingster-column-20" ><div id="text-38" class="widget widget_text kingster-widget">
-<h3 class="kingster-widget-title">Social Media</h3><span class="clear"></span>			
-<div class="textwidget"><ul style="margin-left:16px;">
-                                                              <li><a class="bg_fb" href="'.$data['fb'].'"><i class="fa fa-facebook"></i> Facebook</a></li>
-                                    <li><a class="bg_twitter" href="'.$data['tw'].'"><i class="fa fa-twitter"></i> Twitter</a></li>
-									       <li><a class="bg_behance" href="'.$data['in'].'"><i class="fa fa-instagram"></i> Instagram</a></li>
-                                    <li><a class="bg_gp" href="'.$data['tele'].'"><i class="fa fa-telegram"></i> Telegram</a></li>
-                                <li><a class="bg_gp" href="https://api.whatsapp.com/send?phone='.$data['wa'].'&amp;text="><i class="fa fa-whatsapp"></i> Whatsapp</a></li>
-                                </ul>
-
-</div>
-		</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
- 
-'; 
-					
-} ?>	
-						
-							
-										
-										
-						<div class="kingster-footer-column kingster-item-pdlr kingster-column-20" ><div id="text-38" class="widget widget_text kingster-widget">
-<h3 class="kingster-widget-title">Quick Link</h3><span class="clear"></span>			
-<div class="textwidget">
-
-			
-									
-	<?php 
-global $koneksi_db;
-
-$hasil3 = $koneksi_db->sql_query( "SELECT * FROM menu2 WHERE published=1 ORDER BY ordering" );
-while ($datamenu3 = $koneksi_db->sql_fetchrow($hasil3)) {
-$idmenu3 = $datamenu3['id'];
-$menuidmenu3 = $datamenu3['menu2'];
-$urlidmenu3 = $datamenu3['url'];
-$adamenu3=$koneksi_db->sql_numrows($koneksi_db->sql_query("SELECT * FROM submenu2 where parent='".$idmenu3."' AND published='1'"));
-
-echo '
-		
-		';
-
-
-
-if ($adamenu3 > 0) {
-	
-	echo ' <ul>';
-
-$hasil23 = $koneksi_db->sql_query( "SELECT * FROM `submenu2` WHERE published='1' AND  parent='".$idmenu3."' ORDER By `ordering` ASC");
-while ($datamenu23 = $koneksi_db->sql_fetchrow($hasil23)) {
-$idmenu23 = $datamenu23['id'];
-
-$menuidmenu23 = $datamenu23['menu2'];
-$urlidmenu23 = $datamenu23['url'];
-
-
-
-
-echo '
-                      <li><a href="'.$urlidmenu23.'" title="'.$menuidmenu23.'">'.$menuidmenu23.'</a></li>                  
-                         
-                   
-				';
-
-
-}
-echo ' 
-                          
-                         
-                       
-                 </ul>
-				';
-}
-
-
-
-echo ' 
-                   ';
-
-}
-
-
-
-
-
-
-
-
-
-                 
-                           
-?>						
-										
-										
-										
-										
-										
-										
-										
-			</div>
-		</div>
-</div>								
-										
-                 </div>	                          
-                                          
-						
-									
-									
-									
-				
-
-
-
-
-				
-									
-									
-									
-									
-									
-		
-
-</div></footer></div></div>
-
-
-
-
-						
-<?php
-global $koneksi_db, $maxkonten;
-$perintah="SELECT * FROM mod_data_profil";
-$hasil = $koneksi_db->sql_query( $perintah );
-$coint_i = 0;
-while ($data = $koneksi_db->sql_fetchrow($hasil)) {
-				$coint_i++;
-				$id = md5($data['id']);
-				$tahun = date('Y');
-				
-				
-				
-				$propinsixw = $koneksi_db->sql_query("SELECT * FROM mod_data_warna WHERE id='1'");
-while($pxw=$koneksi_db->sql_fetchrow($propinsixw)){
-		$warna = $pxw['nama'];
-	$warna2 = $pxw['nama2'];
-}
-
- echo '   
-<div class="kingster-copyright-wrapper"   style="background:'.$data['warnaf2'].';"><div class="kingster-copyright-container kingster-container clearfix"><div class="kingster-copyright-left kingster-item-pdlr">Copyright '.$tahun.' ©
-                            '.$data['nama'].'. All rights reserved.</div>
-
-				 
-                          
-			
-			
-			
-		
- 
- 
-
- 
-'; 
-					
-} ?>					
-
-
-
-<div style="position:fixed;left:20px;bottom:20px;">
-<a href="https://api.whatsapp.com/send?phone=+628119081122&text=Assallamualaikum...">
-<button style="background:#32C03C;vertical-align:center;height:36px;border-radius:5px">
-<img src="images/wa.jpg"> Kontak Kami</button></a>
+    $coint_i++;
+    $id = md5($data['id']);
+?>
+<footer style="background-color: #0f172a; color: #94a3b8; padding-top: 60px; font-family: var(--font-main); border-top: 4px solid #0b4d3c;">
+    <div class="container">
+        <div class="row" style="margin-bottom: 40px;">
+            <!-- Kolom 1: Tentang Kami -->
+            <div class="col-md-5 col-sm-12" style="margin-bottom: 30px;">
+                <h3 style="color: #ffffff; font-size: 18px; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 0.5px; border-left: 3px solid #c89a3b; padding-left: 10px;">
+                    Tentang Kampus
+                </h3>
+                <p style="font-size: 14px; line-height: 1.7; color: #cbd5e1; margin-bottom: 20px;">
+                    <?= $data['desc']; ?>
+                </p>
+                <div style="font-size: 13px; line-height: 2; color: #cbd5e1;">
+                    <div><i class="fa fa-map-marker" style="color: #c89a3b; width: 20px;"></i> <?= htmlspecialchars($data['alamat']); ?></div>
+                    <div><i class="fa fa-phone" style="color: #c89a3b; width: 20px;"></i> Telp: <?= htmlspecialchars($data['telp']); ?></div>
+                    <div><i class="fa fa-envelope-o" style="color: #c89a3b; width: 20px;"></i> Email: <?= htmlspecialchars($data['email']); ?></div>
+                </div>
+            </div>
+
+            <!-- Kolom 2: Quick Links -->
+            <div class="col-md-4 col-sm-12" style="margin-bottom: 30px;">
+                <h3 style="color: #ffffff; font-size: 18px; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 0.5px; border-left: 3px solid #c89a3b; padding-left: 10px;">
+                    Menu Pintasan
+                </h3>
+                <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 2.2;">
+                    <?php 
+                    $hasil3 = $koneksi_db->sql_query( "SELECT * FROM menu2 WHERE published=1 ORDER BY ordering LIMIT 6" );
+                    while ($datamenu3 = $koneksi_db->sql_fetchrow($hasil3)) {
+                    ?>
+                    <li>
+                        <a href="<?= htmlspecialchars($datamenu3['url']); ?>" style="color: #cbd5e1; text-decoration: none; transition: color 0.2s ease;">
+                            <i class="fa fa-angle-right" style="color: #c89a3b; margin-right: 8px;"></i> <?= htmlspecialchars($datamenu3['menu2']); ?>
+                        </a>
+                    </li>
+                    <?php } ?>
+                </ul>
+            </div>
+
+            <!-- Kolom 3: Media Sosial -->
+            <div class="col-md-3 col-sm-12" style="margin-bottom: 30px;">
+                <h3 style="color: #ffffff; font-size: 18px; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 0.5px; border-left: 3px solid #c89a3b; padding-left: 10px;">
+                    Media Sosial
+                </h3>
+                <p style="font-size: 13px; color: #94a3b8; margin-bottom: 16px;">
+                    Terhubung langsung dengan kanal komunikasi resmi kami:
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+                    <?php if(!empty($data['fb'])) { ?>
+                    <a href="<?= $data['fb']; ?>" target="_blank" style="color: #cbd5e1; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa fa-facebook-square" style="color: #60a5fa; font-size: 18px; width: 20px;"></i> Facebook
+                    </a>
+                    <?php } ?>
+                    <?php if(!empty($data['in'])) { ?>
+                    <a href="<?= $data['in']; ?>" target="_blank" style="color: #cbd5e1; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa fa-instagram" style="color: #f472b6; font-size: 18px; width: 20px;"></i> Instagram
+                    </a>
+                    <?php } ?>
+                    <?php if(!empty($data['wa'])) { ?>
+                    <a href="https://api.whatsapp.com/send?phone=<?= $data['wa']; ?>" target="_blank" style="color: #cbd5e1; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa fa-whatsapp" style="color: #4ade80; font-size: 18px; width: 20px;"></i> WhatsApp PMB
+                    </a>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright Bar -->
+    <div style="background-color: #090d16; border-top: 1px solid rgba(255,255,255,0.06); padding: 18px 0; font-size: 13px; color: #64748b;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+                Copyright &copy; <?= date('Y'); ?> <strong><?= htmlspecialchars($data['nama']); ?></strong>. All rights reserved.
+            </div>
+            <div style="font-size: 12px;">
+                Sistem Penerimaan Mahasiswa Baru (PMB)
+            </div>
+        </div>
+    </div>
+</footer>
+<?php } ?>
+
+<!-- WhatsApp Floating Button Flat -->
+<div style="position: fixed; left: 20px; bottom: 20px; z-index: 9999;">
+    <a href="https://api.whatsapp.com/send?phone=+628119081122&text=Assalamu%27alaikum%20Admin%20PMB%20IAI%20Persis%20Bandung..." target="_blank" rel="noopener" style="text-decoration: none;">
+        <div style="background: #25D366; color: #ffffff; padding: 10px 18px; font-weight: 700; font-size: 13px; display: flex; align-items: center; gap: 8px; border: 1px solid #1ebd59; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4); border-radius: 0px;">
+            <i class="fa fa-whatsapp" style="font-size: 20px;"></i>
+            <span>Chat Helpdesk PMB</span>
+        </div>
+    </a>
 </div>
 
+<a href="#kingster-top-anchor" class="kingster-footer-back-to-top-button" id="kingster-footer-back-to-top-button" style="border-radius: 0px;"><i class="fa fa-angle-up"></i></a>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<a href="#kingster-top-anchor" class="kingster-footer-back-to-top-button" id="kingster-footer-back-to-top-button"><i class="fa fa-angle-up" ></i></a>
-<style>@media only screen and (max-width: 999px){#gdlr-core-column-1 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 999px){#gdlr-core-column-1 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-1 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-1 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}#gdlr-core-title-item-id-22003 .gdlr-core-title-item-title a{ color:#ffffff; }#gdlr-core-title-item-id-22003 .gdlr-core-title-item-title a:hover{ color:#ff4800; }@media only screen and (max-width: 999px){#gdlr-core-column-2 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 999px){#gdlr-core-column-2 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-2 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-2 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}#gdlr-core-title-item-id-47003 .gdlr-core-title-item-title a{ color:#ffffff; }#gdlr-core-title-item-id-47003 .gdlr-core-title-item-title a:hover{ color:#ff4800; }@media only screen and (max-width: 999px){#gdlr-core-column-3 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 999px){#gdlr-core-column-3 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-3 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-3 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}#gdlr-core-title-item-id-18789 .gdlr-core-title-item-title a{ color:#ffffff; }#gdlr-core-title-item-id-18789 .gdlr-core-title-item-title a:hover{ color:#ff4800; }@media only screen and (max-width: 999px){#gdlr-core-column-4 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 999px){#gdlr-core-column-4 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-4 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-4 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}#gdlr-core-title-item-id-6087 .gdlr-core-title-item-title a{ color:#ffffff; }#gdlr-core-title-item-id-6087 .gdlr-core-title-item-title a:hover{ color:#ff4800; }@media only screen and (max-width: 999px){#gdlr-core-column-5 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 999px){#gdlr-core-column-5 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-5 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-5 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}#gdlr-core-title-item-id-5841 .gdlr-core-title-item-title a{ color:#ffffff; }#gdlr-core-title-item-id-5841 .gdlr-core-title-item-title a:hover{ color:#ff4800; }@media only screen and (max-width: 999px){#gdlr-core-column-6 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 999px){#gdlr-core-column-6 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-6 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-6 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}#gdlr-core-title-item-id-33979 .gdlr-core-title-item-title a{ color:#ffffff; }#gdlr-core-title-item-id-33979 .gdlr-core-title-item-title a:hover{ color:#ff4800; }@media only screen and (max-width: 999px){#gdlr-core-column-7 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 999px){#gdlr-core-column-7 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-7 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-7 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}#gdlr-core-title-item-id-76371 .gdlr-core-title-item-title a{ color:#ffffff; }#gdlr-core-title-item-id-76371 .gdlr-core-title-item-title a:hover{ color:#ff4800; }@media only screen and (max-width: 999px){#gdlr-core-column-8 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 999px){#gdlr-core-column-8 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-8 .gdlr-core-pbf-column-content-margin{padding-bottom: 5px !important;}}@media only screen and (max-width: 767px){#gdlr-core-column-8 .gdlr-core-pbf-column-content-margin{margin-bottom: 5px !important;}}#gdlr-core-title-item-id-80471 .gdlr-core-title-item-title a{ color:#ffffff; }#gdlr-core-title-item-id-80471 .gdlr-core-title-item-title a:hover{ color:#ff4800; }#gdlr-core-button-id-30852{font-size: 20px ;color: #302b60 ;padding-top: 25px;padding-bottom: 25px;border-radius: 4px;-moz-border-radius: 4px;-webkit-border-radius: 4px;background: #ffcc00 ;}#gdlr-core-button-id-30852:hover{color: #ff4800 ;}#gdlr-core-title-item-id-32422 .gdlr-core-title-item-title a{ color:#302b60; }</style>			<script type="text/javascript">
-				function revslider_showDoubleJqueryError(sliderID) {
-					var errorMessage = "Revolution Slider Error: You have some jquery.js library include that comes after the revolution files js include.";
-					errorMessage += "<br> This includes make eliminates the revolution slider libraries, and make it not work.";
-					errorMessage += "<br><br> To fix it you can:<br>&nbsp;&nbsp;&nbsp; 1. In the Slider Settings -> Troubleshooting set option:  <strong><b>Put JS Includes To Body</b></strong> option to true.";
-					errorMessage += "<br>&nbsp;&nbsp;&nbsp; 2. Find the double jquery.js include and remove it.";
-					errorMessage = "<span style='font-size:16px;color:#BC0C06;'>" + errorMessage + "</span>";
-						jQuery(sliderID).show().html(errorMessage);
-				}
-			</script>
-			<script type='text/javascript' src='wp-content/plugins/goodlayers-core/plugins/combine/script6a4d.js?ver=6.1.1' id='gdlr-core-plugin-js'></script>
-			<script type='text/javascript' id='gdlr-core-page-builder-js-extra'>
-/* <![CDATA[ */
-var gdlr_core_pbf = {"admin":"","video":{"width":"640","height":"360"},"ajax_url":"wp-admin\/admin-ajax.php"};
-/* ]]> */
-</script>
+<script type='text/javascript' src='wp-content/plugins/goodlayers-core/plugins/combine/script6a4d.js?ver=6.1.1' id='gdlr-core-plugin-js'></script>
 <script type='text/javascript' src='wp-content/plugins/goodlayers-core/include/js/page-builderd36b.js?ver=1.3.9' id='gdlr-core-page-builder-js'></script>
 <script type='text/javascript' src='wp-includes/js/jquery/ui/effect.min3f14.js?ver=1.13.2' id='jquery-effects-core-js'></script>
-
 <script type='text/javascript' src='wp-content/themes/kingster/js/script-core8a54.js?ver=1.0.0' id='kingster-script-core-js'></script>
-
-
-
-
-							
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
