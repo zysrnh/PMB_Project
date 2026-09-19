@@ -132,6 +132,117 @@
             max-width: 600px;
             margin: 0 auto;
         }
+
+        /* ========================================================
+           MODERN FLAT NAVBAR & DROPDOWN MENU SYSTEM
+           ======================================================== */
+        .kingster-navigation .sf-menu > li > a {
+            font-family: var(--font-heading) !important;
+            font-size: 14.5px !important;
+            font-weight: 600 !important;
+            color: #0f172a !important;
+            transition: color 0.2s ease !important;
+            padding-bottom: 34px !important;
+        }
+
+        .kingster-navigation .sf-menu > li > a:hover,
+        .kingster-navigation .sf-menu > li.current-menu-item > a,
+        .kingster-navigation .sf-menu > li.current-menu-ancestor > a {
+            color: #0b4d3c !important;
+        }
+
+        /* Remove Kingster Orange Slide-bar */
+        .kingster-navigation .kingster-navigation-slide-bar {
+            border-color: #0b4d3c !important;
+            height: 3px !important;
+        }
+        .kingster-navigation .kingster-navigation-slide-bar:before {
+            border-bottom-color: #0b4d3c !important;
+        }
+
+        /* Dropdown Container (Level 1 & Nested Level 2) */
+        .sf-menu ul.sub-menu,
+        .sf-vertical ul.sub-menu,
+        .kingster-navigation .sf-menu > .kingster-normal-menu ul {
+            background: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            border-top: 3px solid #0b4d3c !important;
+            border-radius: 0px !important;
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08) !important;
+            padding: 6px 0 !important;
+            min-width: 280px !important;
+            margin-top: 0px !important;
+        }
+
+        /* Dropdown List Items */
+        .sf-menu > .kingster-normal-menu li,
+        .sf-vertical ul.sub-menu li,
+        .sf-menu ul.sub-menu li {
+            background-color: #ffffff !important;
+            border-bottom: 1px solid #f1f5f9 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            position: relative !important;
+            display: block !important;
+            width: 100% !important;
+        }
+
+        .sf-menu ul.sub-menu li:last-child {
+            border-bottom: none !important;
+        }
+
+        /* Dropdown Links */
+        .sf-menu > li > .sub-menu a,
+        .sf-vertical ul.sub-menu li a,
+        .sf-menu ul.sub-menu li a {
+            font-family: var(--font-heading) !important;
+            font-size: 13.5px !important;
+            font-weight: 600 !important;
+            color: #334155 !important;
+            padding: 12px 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            background: #ffffff !important;
+            border-left: 3px solid transparent !important;
+            transition: all 0.2s ease !important;
+            text-decoration: none !important;
+            line-height: 1.4 !important;
+        }
+
+        /* Dropdown Hover State */
+        .sf-menu > li > .sub-menu a:hover,
+        .sf-menu > li > .sub-menu .current-menu-item > a,
+        .sf-menu > li > .sub-menu .current-menu-ancestor > a,
+        .sf-menu ul.sub-menu li a:hover,
+        .sf-menu ul.sub-menu li:hover > a {
+            background-color: #ecfdf5 !important;
+            color: #0b4d3c !important;
+            border-left-color: #0b4d3c !important;
+            padding-left: 24px !important;
+        }
+
+        /* Nested Submenu (Level 2 Flyout e.g. "Ekonomi Syariah") */
+        .sf-menu ul.sub-menu ul.sub-menu {
+            top: -6px !important;
+            left: 100% !important;
+            border-top: 3px solid #c89a3b !important;
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        .sf-menu ul.sub-menu li.menu-item-has-children > a:after {
+            content: "\f105";
+            font-family: FontAwesome;
+            font-size: 14px;
+            color: #94a3b8;
+            margin-left: 12px;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .sf-menu ul.sub-menu li.menu-item-has-children:hover > a:after {
+            color: #0b4d3c;
+            transform: translateX(3px);
+        }
     </style>
 
     <script type='text/javascript' src='wp-includes/js/jquery/jquery.mina7a0.js?ver=3.6.1' id='jquery-core-js'></script>
