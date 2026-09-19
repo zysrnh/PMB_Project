@@ -9,7 +9,7 @@
     <meta name="Distribution" content="Global" />
     <meta name="Author" content="Administrator" />
     <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
  
     {medsos}
     {baseurl}
@@ -51,6 +51,12 @@
             color: #334155;
             background-color: #ffffff;
             -webkit-font-smoothing: antialiased;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        .kingster-page-preload {
+            display: none !important;
         }
 
         h1, h2, h3, h4, h5, h6, .kingster-title-font {
@@ -130,6 +136,10 @@
 
     <script type='text/javascript' src='wp-includes/js/jquery/jquery.mina7a0.js?ver=3.6.1' id='jquery-core-js'></script>
     <script type='text/javascript' src='wp-includes/js/jquery/jquery-migrate.mind617.js?ver=3.3.2' id='jquery-migrate-js'></script>
+    <script type='text/javascript'>
+        window.$ = window.jQuery;
+        var gdlr_core_pbf = {"admin":"","video":{"width":"640","height":"360"},"ajax_url":"wp-admin\/admin-ajax.php"};
+    </script>
     <script type='text/javascript' src='wp-content/plugins/revslider/public/assets/js/jquery.themepunch.tools.minf542.js?ver=5.4.8.3' id='tp-tools-js'></script>
     <script type='text/javascript' src='wp-content/plugins/revslider/public/assets/js/jquery.themepunch.revolution.minf542.js?ver=5.4.8.3' id='revmin-js'></script>
 
@@ -141,61 +151,48 @@
 
 {atas}
 
-<div class="kingster-mobile-menu-right">
-    <div class="kingster-main-menu-search" id="kingster-mobile-top-search"><i class="fa fa-search"></i></div>
-    <div class="kingster-top-search-wrap">
-        <div class="kingster-top-search-close"></div>
-        <div class="kingster-top-search-row">
-            <div class="kingster-top-search-cell">
-                <form role="search" method="get" class="search-form" action="index.php">
-                    <input type="text" class="search-field kingster-title-font" placeholder="Cari info PMB..." value="" name="query">
-                    <div class="kingster-top-search-submit"><i class="fa fa-search"></i></div>
-                    <input type="hidden" name="pilih" value="search" />
-                    <input type="submit" class="search-submit" value="Search">
-                    <div class="kingster-top-search-close"><i class="icon_close"></i></div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="kingster-mobile-menu">
-        <a class="kingster-mm-menu-button kingster-mobile-menu-button kingster-mobile-button-hamburger" href="#kingster-mobile-menu"><span></span></a>
-        <div class="kingster-mm-menu-wrap kingster-navigation-font" id="kingster-mobile-menu" data-slide="right">
-            <ul id="menu-pmb-menu" class="m-menu">
-                <li class="menu-item"><a href="index.html">Home</a></li>
-                {logo}
-            </ul>
-        </div>
-    </div>
+<div class="kingster-mobile-menu-right" ><div class="kingster-main-menu-search" id="kingster-mobile-top-search" ><i class="fa fa-search" ></i></div><div class="kingster-top-search-wrap" >
+	<div class="kingster-top-search-close" ></div>
+	<div class="kingster-top-search-row" >
+		<div class="kingster-top-search-cell" >
+			<form role="search" method="get" class="search-form" action="index.php">
+	<input type="text" class="search-field kingster-title-font" placeholder="Search..." value="" name="query">
+	<div class="kingster-top-search-submit"><i class="fa fa-search" ></i></div>
+ <input type="hidden" name="pilih" value="search" />
+	<input type="submit" class="search-submit" value="Search">
+	<div class="kingster-top-search-close"><i class="icon_close" ></i></div>
+</form>
+		</div>
+	</div>
 </div>
+<div class="kingster-mobile-menu" >
+<a class="kingster-mm-menu-button kingster-mobile-menu-button kingster-mobile-button-hamburger" href="#kingster-mobile-menu" ><span></span></a>
+<div class="kingster-mm-menu-wrap kingster-navigation-font" id="kingster-mobile-menu" data-slide="right" ><ul id="menu-pmb-menu" class="m-menu">
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-16203"><a href="index.html">Home</a></li>
+{logo}
+</ul></div></div></div></div></div></div>
 
 {atas2}
 
-<li class="menu-item"><a href="index.html">Home</a></li>
+<li ><a href="index.html">Home</a></li>
 {linklogin}
-
-</ul>
-<div class="kingster-navigation-slide-bar" id="kingster-navigation-slide-bar"></div>
+</ul><div class="kingster-navigation-slide-bar" id="kingster-navigation-slide-bar" ></div></div><div class="kingster-main-menu-right-wrap clearfix " ><div class="kingster-main-menu-search" id="kingster-top-search" ><i class="icon_search" ></i></div><div class="kingster-top-search-wrap" >
+	<div class="kingster-top-search-close" ></div>
+	<div class="kingster-top-search-row" >
+		<div class="kingster-top-search-cell" >
+			<form role="search" method="get" class="search-form" action="index.php">
+	<input type="text" class="search-field kingster-title-font" placeholder="Search..." value="" name="query">
+	<div class="kingster-top-search-submit"><i class="fa fa-search" ></i></div>
+ <input type="hidden" name="pilih" value="search" />
+	<input type="submit" class="search-submit" value="Search">
+	<div class="kingster-top-search-close"><i class="icon_close" ></i></div>
+</form>
+		</div>
+	</div>
 </div>
-<div class="kingster-main-menu-right-wrap clearfix">
-    <div class="kingster-main-menu-search" id="kingster-top-search"><i class="fa fa-search"></i></div>
-    <div class="kingster-top-search-wrap">
-        <div class="kingster-top-search-close"></div>
-        <div class="kingster-top-search-row">
-            <div class="kingster-top-search-cell">
-                <form role="search" method="get" class="search-form" action="index.php">
-                    <input type="text" class="search-field kingster-title-font" placeholder="Cari info PMB..." value="" name="query">
-                    <div class="kingster-top-search-submit"><i class="fa fa-search"></i></div>
-                    <input type="hidden" name="pilih" value="search" />
-                    <input type="submit" class="search-submit" value="Search">
-                    <div class="kingster-top-search-close"><i class="icon_close"></i></div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-</div><!-- kingster-navigation -->
-</div><!-- kingster-header-inner -->
-</div><!-- kingster-header-container -->
+</div> </div><!-- kingster-navigation -->
+		</div><!-- kingster-header-inner -->
+	</div><!-- kingster-header-container -->
 </header><!-- header -->	
 
 {header}
@@ -211,15 +208,17 @@
 {spasi3}
 
 {kiri}
+</div>
+</div>
 
 {footer}
 
 <script src="js/bootstrap-datepicker2.js"></script>
 <script>
-$(function(){
-    $(".tcal").datepicker({
-        format:'yyyy-mm-dd'
-    });
+jQuery(function($){
+	$(".tcal").datepicker({
+	format:'yyyy-mm-dd'
+	});
 });
 </script>
 </body>
