@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- generator="FeedCreator 1.7.2-ppt (info@mypapit.net)" -->
+<rss version="2.0">
+    <channel>
+        <title>PMB IAI PERSIS BANDUNG</title>
+        <description></description>
+        <link>pmb.iaipibandung.ac.id</link>
+        <lastBuildDate>Thu, 18 Dec 2025 20:14:59 +0700</lastBuildDate>
+        <generator>FeedCreator 1.7.2-ppt (info@mypapit.net)</generator>
+        <image>
+            <url>pmb.iaipibandung.ac.id/images/browser-48x48.png</url>
+            <title></title>
+            <link>pmb.iaipibandung.ac.id</link>
+            <description>Feed, Support by Administrator.</description>
+        </image>
+        <item>
+            <title>test2</title>
+            <link>pmb.iaipibandung.ac.id/artikel/38/test2.html</link>
+            <description>&amp;nbsp;
+Bandung &amp;mdash; Dalam rangka memenuhi program Praktik Kerja Lapangan (PKL), para siswa dari SMK Pasundan Banjaran melaksanakan kegiatan magang di Kampus Institut Agama Islam (IAI) Persatuan Islam Bandung.
+Kegiatan PKL ini bertujuan untuk memberikan pengalaman kerja nyata kepada para siswa agar mereka dapat menerapkan ilmu yang telah dipelajari di sekolah dalam dunia kerja yang sesungguhnya.
+Selama pelaksanaan PKL, para siswa ditempatkan...</description>
+            <author>admin</author>
+            <pubDate>Thu, 11 Dec 2025 22:55:58 +0700</pubDate>
+        </item>
+        <item>
+            <title>tes</title>
+            <link>pmb.iaipibandung.ac.id/artikel/37/tes.html</link>
+            <description>kjhaskdaasd</description>
+            <author>admin</author>
+            <pubDate>Thu, 11 Dec 2025 22:49:05 +0700</pubDate>
+        </item>
+    </channel>
+</rss>
