@@ -284,7 +284,7 @@ while ($data_profil = $koneksi_db->sql_fetchrow($hasil_profil)) {
 }
 
 .news-card-title {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 700;
     line-height: 1.45;
     color: #0f172a;
@@ -459,7 +459,21 @@ while ($data_profil = $koneksi_db->sql_fetchrow($hasil_profil)) {
             <?php
             $query_berita = $koneksi_db->sql_query("SELECT * FROM `artikel` WHERE publikasi=1 ORDER BY `id` DESC LIMIT 3");
             while ($data_berita = $koneksi_db->sql_fetchrow($query_berita)) {
-                $url_slug = str_replace(" ", "-", $data_berita['judul']);
+                $raw_judul = $data_berita['judul'];
+                // Decode double-encoded Windows-1252 to UTF-8
+                if (strpos($raw_judul, 'ðŸ') !== false || strpos($raw_judul, 'â') !== false) {
+                    $clean_title = mb_convert_encoding($raw_judul, 'Windows-1252', 'UTF-8');
+                } else {
+                    $clean_title = $raw_judul;
+                }
+
+                $clean_title = trim(preg_replace('/\s+/', ' ', $clean_title));
+                if (empty($clean_title)) {
+                    $clean_title = $raw_judul;
+                }
+
+                // Buat slug untuk link artikel
+                $url_slug = str_replace(" ", "-", $clean_title);
                 $url_slug = preg_replace('/[^A-Za-z0-9\-]/', '', $url_slug);
                 $url_slug = preg_replace('/-+/', '-', $url_slug);
                 $url_slug = trim($url_slug, '-');
@@ -467,14 +481,27 @@ while ($data_profil = $koneksi_db->sql_fetchrow($hasil_profil)) {
                     $url_slug = 'artikel-'.$data_berita['id'];
                 }
 
-                $img_src = 'images/berita-kampus-placeholder.jpg';
-                if (!empty($data_berita['gambar']) && file_exists('images/artikel/'.$data_berita['gambar'])) {
-                    $img_src = 'images/artikel/'.$data_berita['gambar'];
+                // Penentuan path image src yang presisi
+                $raw_gambar = $data_berita['gambar'];
+                $img_src = 'images/course-img.jpg';
+
+                if (!empty($raw_gambar)) {
+                    if (strpos($raw_gambar, 'ðŸ') !== false || strpos($raw_gambar, 'â') !== false) {
+                        $clean_gambar = mb_convert_encoding($raw_gambar, 'Windows-1252', 'UTF-8');
+                    } else {
+                        $clean_gambar = $raw_gambar;
+                    }
+
+                    if (file_exists('images/artikel/' . $clean_gambar)) {
+                        $img_src = 'images/artikel/' . rawurlencode($clean_gambar);
+                    } elseif (file_exists('images/artikel/' . $raw_gambar)) {
+                        $img_src = 'images/artikel/' . rawurlencode($raw_gambar);
+                    }
                 }
             ?>
             <div class="news-card-flat">
                 <div class="news-card-thumb">
-                    <img src="<?= htmlspecialchars($img_src); ?>" alt="<?= htmlspecialchars($data_berita['judul']); ?>">
+                    <img src="<?= $img_src; ?>" onerror="this.onerror=null; this.src='images/course-img.jpg';" alt="<?= htmlspecialchars($clean_title); ?>">
                 </div>
                 <div class="news-card-body">
                     <div>
@@ -483,7 +510,7 @@ while ($data_profil = $koneksi_db->sql_fetchrow($hasil_profil)) {
                             <span><i class="fa fa-eye"></i> <?= $data_berita['hits']; ?> Views</span>
                         </div>
                         <a href="artikel/<?= $data_berita['id']; ?>/<?= $url_slug; ?>.html" class="news-card-title">
-                            <?= htmlspecialchars($data_berita['judul']); ?>
+                            <?= htmlspecialchars($clean_title); ?>
                         </a>
                     </div>
                     <a href="artikel/<?= $data_berita['id']; ?>/<?= $url_slug; ?>.html" class="news-read-more">
@@ -584,4 +611,4 @@ function toggleFaq(elem) {
         body.classList.add('open');
     }
 }
-</script>
+</script>
