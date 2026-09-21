@@ -22,7 +22,7 @@ class microTimer {
 
 
 include 'ikutan/session.php';
-@header("konten-type: text/html; charset=utf-8;");
+@header("Content-Type: text/html; charset=utf-8;");
 ob_start();
 $_SESSION['modul_ajax'] = true;
 
@@ -39,6 +39,18 @@ include "ikutan/config.php";
 include "ikutan/mysqli.php";
 include "ikutan/template.php";
 global $judul_situs,$theme;
+
+// Normalize &amp; query parameters
+foreach ($_GET as $key => $val) {
+    if (strpos($key, 'amp;') === 0) {
+        $clean_key = substr($key, 4);
+        if (!isset($_GET[$clean_key])) {
+            $_GET[$clean_key] = $val;
+        }
+        unset($_GET[$key]);
+    }
+}
+
 $_GET['aksi'] = !isset($_GET['aksi']) ? null : $_GET['aksi'];
 $_GET['modul'] = !isset($_GET['modul']) ? null : $_GET['modul'];
 $_GET['pilih'] = !isset($_GET['pilih']) ? null : $_GET['pilih'];
@@ -190,7 +202,6 @@ ob_end_clean();
 }
 
 ///// MENU KANAN /////////////////////
-
 
 
 
