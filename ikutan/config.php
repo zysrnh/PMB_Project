@@ -45,6 +45,8 @@ date_default_timezone_set('Asia/Jakarta');
  $koneksi = mysqli_connect($mysql_host, $mysql_user, $mysql_password, $mysql_database);
  if(mysqli_connect_errno()){
   echo "";
+ } else {
+  mysqli_set_charset($koneksi, "latin1");
  }
  
     $query = "SELECT * FROM tb_setting";
