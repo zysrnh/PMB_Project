@@ -55,6 +55,11 @@
             visibility: visible !important;
         }
 
+        /* Hilangkan semua sisa rounded/radius di wrapper utama */
+        *, *::before, *::after {
+            border-radius: 0px !important;
+        }
+
         .kingster-page-preload {
             display: none !important;
         }
@@ -62,6 +67,82 @@
         h1, h2, h3, h4, h5, h6, .kingster-title-font {
             font-family: var(--font-heading) !important;
             letter-spacing: -0.02em;
+        }
+
+        /* Top Bar Global Override (Desktop & Mobile) */
+        .kingster-top-bar {
+            background-color: var(--pmb-primary) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        .kingster-top-bar-background {
+            background-color: var(--pmb-primary) !important;
+            display: none !important;
+        }
+
+        .kingster-top-bar, .kingster-top-bar a, .kingster-top-bar li {
+            color: #ecfdf5 !important;
+            font-family: var(--font-main) !important;
+        }
+
+        .kingster-top-bar i {
+            color: var(--pmb-accent) !important;
+        }
+
+        /* Mobile Header & Controls */
+        .kingster-mobile-header {
+            background: #ffffff !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+
+        .kingster-mobile-menu-button {
+            color: var(--pmb-dark) !important;
+        }
+
+        .kingster-mobile-menu-button span,
+        .kingster-mobile-menu-button span::before,
+        .kingster-mobile-menu-button span::after {
+            background-color: var(--pmb-dark) !important;
+        }
+
+        .kingster-main-menu-search {
+            color: var(--pmb-dark) !important;
+        }
+
+        /* Mobile Slide-out Menu Flat */
+        .kingster-mm-menu-wrap {
+            background-color: var(--pmb-primary-dark) !important;
+            border-left: 3px solid var(--pmb-accent) !important;
+        }
+
+        .kingster-mm-menu-wrap ul.m-menu li a {
+            color: #ffffff !important;
+            font-family: var(--font-heading) !important;
+            font-weight: 600 !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+            padding: 14px 20px !important;
+        }
+
+        .kingster-mm-menu-wrap ul.m-menu li a:hover,
+        .kingster-mm-menu-wrap ul.m-menu li.current-menu-item > a {
+            color: var(--pmb-accent) !important;
+            background-color: rgba(200, 154, 59, 0.1) !important;
+        }
+
+        .kingster-mm-menu-wrap ul.m-menu ul.sub-menu {
+            background-color: #031c15 !important;
+        }
+
+        /* Top Search Popup Flat */
+        .kingster-top-search-wrap {
+            background: rgba(7, 53, 41, 0.96) !important;
+        }
+
+        .kingster-top-search-wrap input.search-field {
+            background: #ffffff !important;
+            color: #0f172a !important;
+            border: 2px solid var(--pmb-accent) !important;
+            font-family: var(--font-heading) !important;
         }
 
         /* Flat Utilities */
