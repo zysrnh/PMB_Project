@@ -217,6 +217,29 @@
         /* ========================================================
            MODERN FLAT NAVBAR & DROPDOWN MENU SYSTEM
            ======================================================== */
+        /* Hilangkan Slide Bar balok bawaan tema Kingster */
+        .kingster-navigation .kingster-navigation-slide-bar {
+            display: none !important;
+            border: none !important;
+            height: 0 !important;
+        }
+        .kingster-navigation .kingster-navigation-slide-bar:before {
+            display: none !important;
+        }
+
+        /* Global Outline Killer untuk Navbar */
+        .kingster-navigation *,
+        .sf-menu,
+        .sf-menu *,
+        .sf-menu a,
+        .sf-menu li,
+        .sf-menu a:focus,
+        .sf-menu a:active,
+        .sf-menu li:focus,
+        .sf-menu li:active {
+            outline: none !important;
+        }
+
         .kingster-navigation .sf-menu > li > a {
             font-family: var(--font-heading) !important;
             font-size: 14.5px !important;
@@ -224,6 +247,7 @@
             color: #0f172a !important;
             transition: color 0.2s ease !important;
             padding-bottom: 34px !important;
+            border: none !important;
         }
 
         .kingster-navigation .sf-menu > li > a:hover,
@@ -232,16 +256,7 @@
             color: #0b4d3c !important;
         }
 
-        /* Remove Kingster Orange Slide-bar */
-        .kingster-navigation .kingster-navigation-slide-bar {
-            border-color: #0b4d3c !important;
-            height: 3px !important;
-        }
-        .kingster-navigation .kingster-navigation-slide-bar:before {
-            border-bottom-color: #0b4d3c !important;
-        }
-
-        /* Dropdown Container (Level 1 & Nested Level 2) */
+        /* Dropdown Container (Level 1) */
         .sf-menu ul.sub-menu,
         .sf-vertical ul.sub-menu,
         .kingster-navigation .sf-menu > .kingster-normal-menu ul {
@@ -249,9 +264,9 @@
             border: 1px solid #e2e8f0 !important;
             border-top: 3px solid #0b4d3c !important;
             border-radius: 0px !important;
-            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08) !important;
-            padding: 6px 0 !important;
-            min-width: 280px !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+            padding: 0px !important;
+            min-width: 300px !important;
             margin-top: 0px !important;
         }
 
@@ -260,12 +275,14 @@
         .sf-vertical ul.sub-menu li,
         .sf-menu ul.sub-menu li {
             background-color: #ffffff !important;
+            border: none !important;
             border-bottom: 1px solid #f1f5f9 !important;
             padding: 0 !important;
             margin: 0 !important;
             position: relative !important;
             display: block !important;
             width: 100% !important;
+            outline: none !important;
         }
 
         .sf-menu ul.sub-menu li:last-child {
@@ -280,15 +297,17 @@
             font-size: 13.5px !important;
             font-weight: 600 !important;
             color: #334155 !important;
-            padding: 12px 20px !important;
+            padding: 13px 20px !important;
             display: flex !important;
             align-items: center !important;
             justify-content: space-between !important;
             background: #ffffff !important;
+            border: none !important;
             border-left: 3px solid transparent !important;
-            transition: all 0.2s ease !important;
+            transition: all 0.15s ease !important;
             text-decoration: none !important;
             line-height: 1.4 !important;
+            outline: none !important;
         }
 
         /* Dropdown Hover State */
@@ -301,23 +320,29 @@
             color: #0b4d3c !important;
             border-left-color: #0b4d3c !important;
             padding-left: 24px !important;
+            outline: none !important;
         }
 
-        /* Nested Submenu (Level 2 Flyout e.g. "Ekonomi Syariah") */
+        /* Nested Submenu (Level 2 Flyout e.g. "Prodi" di kanan) */
         .sf-menu ul.sub-menu ul.sub-menu {
-            top: -6px !important;
+            top: 0px !important;
             left: 100% !important;
-            border-top: 3px solid #c89a3b !important;
-            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12) !important;
+            background: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            border-top: 3px solid #0b4d3c !important;
+            border-radius: 0px !important;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1) !important;
+            padding: 0px !important;
+            min-width: 290px !important;
         }
 
         .sf-menu ul.sub-menu li.menu-item-has-children > a:after {
             content: "\f105";
             font-family: FontAwesome;
-            font-size: 14px;
+            font-size: 13px;
             color: #94a3b8;
-            margin-left: 12px;
-            transition: color 0.2s ease, transform 0.2s ease;
+            margin-left: 14px;
+            transition: color 0.15s ease, transform 0.15s ease;
         }
 
         .sf-menu ul.sub-menu li.menu-item-has-children:hover > a:after {
