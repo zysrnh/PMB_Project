@@ -241,7 +241,7 @@ $data_profil = $koneksi_db->sql_fetchrow($hasil_profil);
    2. OVERLAPPING QUICK ACTION CARDS
    ========================================== */
 .pmb-overlap-container {
-    margin-top: -65px;
+    margin-top: 26px;
     position: relative;
     z-index: 10;
     margin-bottom: 30px;
@@ -854,71 +854,7 @@ $data_profil = $koneksi_db->sql_fetchrow($hasil_profil);
 
 
 <!-- ==========================================
-     SECTION 1: HERO HEADER (PROSPERUM STYLE)
-     ========================================== -->
-<section class="pmb-hero-section">
-    <div class="container">
-        <div class="pmb-hero-row">
-            <!-- Left Headline & CTA -->
-            <div class="pmb-hero-content">
-                <div class="pmb-hero-badge">
-                    <i class="fa fa-star"></i> Penerimaan Mahasiswa Baru T.A 2026/2027
-                </div>
-                <h1 class="pmb-hero-title">
-                    Wujudkan Masa Depan Gemilang Bersama IAI PERSIS Bandung
-                </h1>
-                <p class="pmb-hero-desc">
-                    Pendidikan tinggi Islam berkualitas, integrasi keilmuan dan teknologi berbasis LMS online modern, serta pembentukan karakter ulul albab yang berakhlak mulia.
-                </p>
-                <div class="pmb-hero-actions">
-                    <a href="https://iaipibdg.sevimaplatform.com/spmbfront/" target="_blank" rel="noopener" class="btn-hero-primary">
-                        <i class="fa fa-user-plus"></i> DAFTAR SEKARANG
-                    </a>
-                    <a href="pages/58/Panduan-Pendaftran-Online-dan-pengisian-Form-Pendaftran.html" class="btn-hero-outline">
-                        <i class="fa fa-book"></i> PANDUAN PENDAFTARAN
-                    </a>
-                </div>
-            </div>
-
-            <!-- Right Floating Stat Badges -->
-            <div class="pmb-hero-stats">
-                <div class="stat-badge-card">
-                    <div class="stat-badge-icon gold">
-                        <i class="fa fa-graduation-cap"></i>
-                    </div>
-                    <div class="stat-badge-text">
-                        <h4>Akreditasi Unggul & Resmi</h4>
-                        <p>Kementerian Agama RI & BAN-PT</p>
-                    </div>
-                </div>
-
-                <div class="stat-badge-card">
-                    <div class="stat-badge-icon green">
-                        <i class="fa fa-laptop"></i>
-                    </div>
-                    <div class="stat-badge-text">
-                        <h4>Sistem Kelas Online LMS</h4>
-                        <p>Fleksibel, Interaktif & Mandiri</p>
-                    </div>
-                </div>
-
-                <div class="stat-badge-card">
-                    <div class="stat-badge-icon slate">
-                        <i class="fa fa-id-card-o"></i>
-                    </div>
-                    <div class="stat-badge-text">
-                        <h4>Beasiswa & Keringanan</h4>
-                        <p>KIP-Kuliah, Tahfidz & Prestasi</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<!-- ==========================================
-     SECTION 2: OVERLAPPING QUICK ACTION CARDS
+     SECTION 1: OVERLAPPING QUICK ACTION CARDS
      ========================================== -->
 <div class="container pmb-overlap-container">
     <div class="pmb-overlap-grid">
