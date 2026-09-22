@@ -8,7 +8,7 @@ if (file_exists("modul/functions.php")) {
 
 global $koneksi_db;
 
-// Cek status periode pendaftaran aktif
+// 1. Cek status periode pendaftaran aktif
 $mulai = $akhir = $mulai2 = $akhir2 = $mulai3 = $akhir3 = '';
 $propinsi12xx2x = $koneksi_db->sql_query("SELECT * FROM mod_data_periode WHERE id='1'");
 if ($propinsi12xx2x && ($p11xx2x = $koneksi_db->sql_fetchrow($propinsi12xx2x))) {
@@ -45,12 +45,13 @@ if ($xt1 == 1) {
 $content = '';
 $datawajibdiisi = array('nama', 'prodi', 'nik', 'kelamin', 'tempat', 'lahir', 'telp', 'email');
 
+// 2. Pemrosesan Data Form POST (Backend Logic)
 if (isset($_POST['submit'])) {
     $error = '';
 
     foreach ($datawajibdiisi as $v) {
         if (empty($_POST[$v])) {
-            $error .= 'Field wajib diisi: <strong>' . htmlspecialchars($v) . '</strong><br />';
+            $error .= 'Bidang wajib diisi: <strong>' . htmlspecialchars($v) . '</strong><br />';
         }
     }
 
@@ -150,7 +151,7 @@ if (isset($_POST['submit'])) {
             }
 
             $content .= '
-            <div style="background: #f0fdf4; border-left: 4px solid #16a34a; padding: 24px; margin-bottom: 30px; font-size: 14.5px; color: #166534; line-height: 1.6;">
+            <div style="background: #f0fdf4; border-left: 4px solid #16a34a; padding: 24px; margin-bottom: 30px; font-size: 14px; color: #166534; line-height: 1.6;">
                 <h3 style="margin: 0 0 10px 0; color: #15803d; font-size: 18px; font-weight: 700; text-transform: uppercase;">Alhamdulillah, Pendaftaran Berhasil!</h3>
                 <p style="margin: 0 0 12px 0;">Akun pendaftaran calon mahasiswa baru Anda telah dibuat dengan rincian:</p>
                 <div style="background: #ffffff; border: 1px solid #bbf7d0; padding: 14px 18px; margin-bottom: 16px; font-size: 14px;">
@@ -172,7 +173,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-// Persiapkan opsi data dropdown
+// 3. Persiapkan Data Dropdown
 $asal44x = '';
 $propinsi5x = $koneksi_db->sql_query("SELECT id, nama FROM mod_data_agama ORDER BY id ASC");
 if ($propinsi5x) {
@@ -198,13 +199,17 @@ if ($propinsi5) {
 }
 ?>
 
-<div class="pmb-register-wrapper" style="max-width: 900px; margin: 20px auto 40px auto; background: #ffffff; border: 1px solid #e2e8f0; padding: 32px 36px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); font-family: inherit;">
-    <div style="border-bottom: 2px solid #0b4d3c; padding-bottom: 14px; margin-bottom: 26px;">
-        <h2 style="margin: 0 0 6px 0; color: #0b4d3c; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
-            PMB Class Online IAIPI Bandung
+<div class="pmb-register-wrapper" style="max-width: 900px; margin: 15px auto 40px auto; background: #ffffff; border: 1px solid #e2e8f0; padding: 32px 36px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); font-family: inherit;">
+    <!-- Form Title & Header -->
+    <div style="border-bottom: 2px solid #0b4d3c; padding-bottom: 14px; margin-bottom: 24px;">
+        <div style="display: inline-block; background: #ecfdf5; color: #0b4d3c; font-size: 11px; font-weight: 800; padding: 3px 8px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; border: 1px solid #d1fae5;">
+            Formulir PMB Online
+        </div>
+        <h2 style="margin: 0 0 6px 0; color: #0b4d3c; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+            Pendaftaran Mahasiswa Baru IAI PERSIS Bandung
         </h2>
-        <p style="margin: 0; color: #64748b; font-size: 14px;">
-            Lengkapi data pendaftaran calon mahasiswa baru di bawah ini dengan informasi yang valid dan benar.
+        <p style="margin: 0; color: #64748b; font-size: 13.5px; line-height: 1.5;">
+            Silakan isi data calon mahasiswa di bawah ini secara lengkap dan benar sesuai dokumen resmi (KTP/Ijazah).
         </p>
     </div>
 
@@ -212,12 +217,18 @@ if ($propinsi5) {
 
     <?php if ($xt1 == 1 || $xt2 == 1 || $xt3 == 1): ?>
     <form method="POST" action="" enctype="multipart/form-data" name="input_jabatan" style="margin: 0;">
-        <table style="width: 100%; border-collapse: separate; border-spacing: 0 14px; font-size: 14px;">
+
+        <!-- Bagian 1: Jalur & Pilihan Program Studi -->
+        <div style="background: #f8fafc; border-left: 3px solid #0b4d3c; padding: 10px 16px; margin-bottom: 16px; font-weight: 700; font-size: 13.5px; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px;">
+            1. Jalur Pendaftaran &amp; Program Studi
+        </div>
+
+        <table style="width: 100%; border-collapse: separate; border-spacing: 0 12px; font-size: 13.5px; margin-bottom: 24px;">
             <tr>
-                <td style="width: 220px; font-weight: 600; color: #334155; vertical-align: middle;">Periode / Gelombang</td>
+                <td style="width: 210px; font-weight: 600; color: #334155; vertical-align: middle;">Periode / Gelombang</td>
                 <td style="width: 15px; text-align: center; color: #64748b;">:</td>
                 <td>
-                    <input type="text" value="Gelombang <?= htmlspecialchars($gel_aktif); ?>" disabled="disabled" style="width: 100%; max-width: 320px; padding: 9px 12px; border: 1px solid #cbd5e1; background: #f8fafc; color: #475569; font-weight: 700; border-radius: 0;">
+                    <input type="text" value="Gelombang <?= htmlspecialchars($gel_aktif); ?>" disabled="disabled" style="width: 100%; max-width: 320px; padding: 9px 12px; border: 1px solid #cbd5e1; background: #f1f5f9; color: #334155; font-weight: 700; border-radius: 0;">
                     <input type="hidden" name="gel" value="<?= htmlspecialchars($gel_aktif); ?>">
                 </td>
             </tr>
@@ -254,10 +265,36 @@ if ($propinsi5) {
             </tr>
 
             <tr>
-                <td style="font-weight: 600; color: #334155; vertical-align: middle;">Nama Lengkap <span style="color: #ef4444;">*</span></td>
+                <td style="font-weight: 600; color: #334155; vertical-align: middle;">Jenis Pendaftaran <span style="color: #ef4444;">*</span></td>
                 <td style="text-align: center; color: #64748b;">:</td>
                 <td>
+                    <select name="jenis" required style="width: 100%; max-width: 320px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
+                        <option value="1" selected>Mahasiswa Baru</option>
+                        <option value="2">Pindahan / Transfer</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Bagian 2: Identitas Calon Mahasiswa -->
+        <div style="background: #f8fafc; border-left: 3px solid #0b4d3c; padding: 10px 16px; margin-bottom: 16px; font-weight: 700; font-size: 13.5px; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px;">
+            2. Identitas Pribadi Calon Mahasiswa
+        </div>
+
+        <table style="width: 100%; border-collapse: separate; border-spacing: 0 12px; font-size: 13.5px; margin-bottom: 24px;">
+            <tr>
+                <td style="width: 210px; font-weight: 600; color: #334155; vertical-align: middle;">Nama Lengkap <span style="color: #ef4444;">*</span></td>
+                <td style="width: 15px; text-align: center; color: #64748b;">:</td>
+                <td>
                     <input type="text" name="nama" required value="<?= htmlspecialchars($_POST['nama'] ?? ''); ?>" placeholder="Masukkan nama lengkap sesuai ijazah/KTP" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
+                </td>
+            </tr>
+
+            <tr>
+                <td style="font-weight: 600; color: #334155; vertical-align: middle;">NIK / No. KTP <span style="color: #ef4444;">*</span></td>
+                <td style="text-align: center; color: #64748b;">:</td>
+                <td>
+                    <input type="text" name="nik" required maxlength="16" value="<?= htmlspecialchars($_POST['nik'] ?? ''); ?>" placeholder="16 digit Nomor Induk Kependudukan" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                 </td>
             </tr>
 
@@ -290,14 +327,6 @@ if ($propinsi5) {
             </tr>
 
             <tr>
-                <td style="font-weight: 600; color: #334155; vertical-align: middle;">NIK / No. KTP <span style="color: #ef4444;">*</span></td>
-                <td style="text-align: center; color: #64748b;">:</td>
-                <td>
-                    <input type="text" name="nik" required maxlength="16" value="<?= htmlspecialchars($_POST['nik'] ?? ''); ?>" placeholder="16 digit Nomor Induk Kependudukan" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
-                </td>
-            </tr>
-
-            <tr>
                 <td style="font-weight: 600; color: #334155; vertical-align: middle;">Agama <span style="color: #ef4444;">*</span></td>
                 <td style="text-align: center; color: #64748b;">:</td>
                 <td>
@@ -320,19 +349,39 @@ if ($propinsi5) {
             </tr>
 
             <tr>
-                <td style="font-weight: 600; color: #334155; vertical-align: middle;">Jenis Pendaftaran <span style="color: #ef4444;">*</span></td>
+                <td style="font-weight: 600; color: #334155; vertical-align: middle;">Nama Ibu Kandung <span style="color: #ef4444;">*</span></td>
                 <td style="text-align: center; color: #64748b;">:</td>
                 <td>
-                    <select name="jenis" required style="width: 100%; max-width: 320px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
-                        <option value="1" selected>Mahasiswa Baru</option>
-                        <option value="2">Pindahan / Transfer</option>
-                    </select>
+                    <input type="text" name="ibu" required value="<?= htmlspecialchars($_POST['ibu'] ?? ''); ?>" placeholder="Nama lengkap ibu kandung" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                 </td>
             </tr>
 
             <tr>
-                <td style="font-weight: 600; color: #334155; vertical-align: middle;">Provinsi Domisili <span style="color: #ef4444;">*</span></td>
+                <td style="font-weight: 600; color: #334155; vertical-align: middle;">Asal Sekolah / PT Asal</td>
                 <td style="text-align: center; color: #64748b;">:</td>
+                <td>
+                    <input type="text" name="sekolah" value="<?= htmlspecialchars($_POST['sekolah'] ?? ''); ?>" placeholder="Nama SMA / SMK / MA / Universitas Asal" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
+                </td>
+            </tr>
+
+            <tr>
+                <td style="font-weight: 600; color: #334155; vertical-align: middle;">NISN (Nomor Induk Siswa Nasional)</td>
+                <td style="text-align: center; color: #64748b;">:</td>
+                <td>
+                    <input type="text" name="nisn" value="<?= htmlspecialchars($_POST['nisn'] ?? ''); ?>" placeholder="10 digit NISN (jika ada)" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
+                </td>
+            </tr>
+        </table>
+
+        <!-- Bagian 3: Wilayah & Alamat Domisili -->
+        <div style="background: #f8fafc; border-left: 3px solid #0b4d3c; padding: 10px 16px; margin-bottom: 16px; font-weight: 700; font-size: 13.5px; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px;">
+            3. Wilayah &amp; Alamat Domisili
+        </div>
+
+        <table style="width: 100%; border-collapse: separate; border-spacing: 0 12px; font-size: 13.5px; margin-bottom: 24px;">
+            <tr>
+                <td style="width: 210px; font-weight: 600; color: #334155; vertical-align: middle;">Provinsi <span style="color: #ef4444;">*</span></td>
+                <td style="width: 15px; text-align: center; color: #64748b;">:</td>
                 <td>
                     <select name="prov" id="propinsi5" required style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                         <option value="">-- Pilih Provinsi --</option>
@@ -375,17 +424,24 @@ if ($propinsi5) {
                 <td style="font-weight: 600; color: #334155; vertical-align: top; padding-top: 10px;">Alamat Lengkap <span style="color: #ef4444;">*</span></td>
                 <td style="text-align: center; color: #64748b; vertical-align: top; padding-top: 10px;">:</td>
                 <td>
-                    <textarea name="alamat" required rows="3" placeholder="Nama jalan, nomor rumah, RT, RW, dusun/kampung" style="width: 100%; max-width: 540px; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff; font-family: inherit; font-size: 14px;"><?= htmlspecialchars($_POST['alamat'] ?? ''); ?></textarea>
+                    <textarea name="alamat" required rows="3" placeholder="Nama jalan, nomor rumah, RT, RW, dusun/kampung" style="width: 100%; max-width: 540px; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff; font-family: inherit; font-size: 13.5px;"><?= htmlspecialchars($_POST['alamat'] ?? ''); ?></textarea>
                     <div style="margin-top: 8px; display: flex; gap: 10px;">
                         <input type="text" name="rt" size="5" placeholder="RT" value="<?= htmlspecialchars($_POST['rt'] ?? ''); ?>" style="width: 80px; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 0; outline: none;">
                         <input type="text" name="rw" size="5" placeholder="RW" value="<?= htmlspecialchars($_POST['rw'] ?? ''); ?>" style="width: 80px; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 0; outline: none;">
                     </div>
                 </td>
             </tr>
+        </table>
 
+        <!-- Bagian 4: Kontak & Komunikasi -->
+        <div style="background: #f8fafc; border-left: 3px solid #0b4d3c; padding: 10px 16px; margin-bottom: 16px; font-weight: 700; font-size: 13.5px; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px;">
+            4. Kontak &amp; Jalur Komunikasi
+        </div>
+
+        <table style="width: 100%; border-collapse: separate; border-spacing: 0 12px; font-size: 13.5px; margin-bottom: 24px;">
             <tr>
-                <td style="font-weight: 600; color: #334155; vertical-align: middle;">No. WhatsApp / Telepon <span style="color: #ef4444;">*</span></td>
-                <td style="text-align: center; color: #64748b;">:</td>
+                <td style="width: 210px; font-weight: 600; color: #334155; vertical-align: middle;">No. WhatsApp / Telepon <span style="color: #ef4444;">*</span></td>
+                <td style="width: 15px; text-align: center; color: #64748b;">:</td>
                 <td>
                     <input type="text" name="telp" required value="<?= htmlspecialchars($_POST['telp'] ?? ''); ?>" placeholder="Contoh: 081234567890" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                 </td>
@@ -396,30 +452,6 @@ if ($propinsi5) {
                 <td style="text-align: center; color: #64748b;">:</td>
                 <td>
                     <input type="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? ''); ?>" placeholder="Contoh: emailanda@gmail.com" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
-                </td>
-            </tr>
-
-            <tr>
-                <td style="font-weight: 600; color: #334155; vertical-align: middle;">Nama Ibu Kandung <span style="color: #ef4444;">*</span></td>
-                <td style="text-align: center; color: #64748b;">:</td>
-                <td>
-                    <input type="text" name="ibu" required value="<?= htmlspecialchars($_POST['ibu'] ?? ''); ?>" placeholder="Nama lengkap ibu kandung" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
-                </td>
-            </tr>
-
-            <tr>
-                <td style="font-weight: 600; color: #334155; vertical-align: middle;">Asal Sekolah / PT Asal</td>
-                <td style="text-align: center; color: #64748b;">:</td>
-                <td>
-                    <input type="text" name="sekolah" value="<?= htmlspecialchars($_POST['sekolah'] ?? ''); ?>" placeholder="Nama SMA / SMK / MA / Universitas Asal" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
-                </td>
-            </tr>
-
-            <tr>
-                <td style="font-weight: 600; color: #334155; vertical-align: middle;">NISN (Nomor Induk Siswa Nasional)</td>
-                <td style="text-align: center; color: #64748b;">:</td>
-                <td>
-                    <input type="text" name="nisn" value="<?= htmlspecialchars($_POST['nisn'] ?? ''); ?>" placeholder="10 digit NISN (jika ada)" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                 </td>
             </tr>
 
@@ -435,7 +467,7 @@ if ($propinsi5) {
         </table>
     </form>
     <?php else: ?>
-        <div style="background: #fef2f2; border-left: 4px solid #ef4444; color: #991b1b; padding: 18px 24px; font-size: 14.5px;">
+        <div style="background: #fef2f2; border-left: 4px solid #ef4444; color: #991b1b; padding: 18px 24px; font-size: 14px;">
             <h4 style="margin: 0 0 6px 0; font-weight: 700; font-size: 16px;">Pendaftaran Sedang Ditutup</h4>
             <p style="margin: 0;">Mohon maaf, saat ini periode pendaftaran mahasiswa baru sedang tidak aktif. Silakan hubungi bagian Helpdesk PMB untuk informasi gelombang berikutnya.</p>
         </div>
