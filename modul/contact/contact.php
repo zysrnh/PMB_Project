@@ -6,7 +6,7 @@ if (!defined('cms-KONTEN')) {
 
 global $koneksi_db, $email_master, $judul_situs, $_META;
 
-$pilih = cleartext($_GET['pilih'] ?? 'contact');
+$pilih = cleartext(isset($_GET['pilih']) ? $_GET['pilih'] : 'contact');
 
 $seo1 = $koneksi_db->sql_query("SELECT * FROM mod_data_meta WHERE nama='$pilih'");
 if ($seo1 && ($pr1xypd = $koneksi_db->sql_fetchrow($seo1))) {
@@ -34,15 +34,15 @@ $alert_msg = '';
 
 // Pemrosesan POST Form Kontak (Backend Logic Terjaga Penuh)
 if (isset($_POST['submit'])) {
-    $nama = text_filter($_POST['nama'] ?? '');
-    $email = text_filter($_POST['email'] ?? '');
-    $pesan = nl2br(text_filter($_POST['pesan'] ?? '', 2));
+    $nama = text_filter(isset($_POST['nama']) ? $_POST['nama'] : '');
+    $email = text_filter(isset($_POST['email']) ? $_POST['email'] : '');
+    $pesan = nl2br(text_filter(isset($_POST['pesan']) ? $_POST['pesan'] : '', 2));
     $error = '';
 
     if (!is_valid_email($email)) {
         $error .= "Format alamat email tidak valid!<br />";
     }
-    $gfx_check = $_POST['gfx_check'] ?? '';
+    $gfx_check = isset($_POST['gfx_check']) ? $_POST['gfx_check'] : '';
     if (!$nama) {
         $error .= "Silakan isi nama lengkap Anda!<br />";
     }
@@ -73,9 +73,9 @@ if (isset($_POST['submit'])) {
     }
 }
 
-$nama_val = htmlspecialchars($nama ?? '');
-$email_val = htmlspecialchars($email ?? '');
-$pesan_val = htmlspecialchars($pesan ?? '');
+$nama_val = htmlspecialchars(isset($nama) ? $nama : '');
+$email_val = htmlspecialchars(isset($email) ? $email : '');
+$pesan_val = htmlspecialchars(isset($pesan) ? $pesan : '');
 ?>
 
 <div class="pmb-contact-wrapper" style="margin: 15px auto 40px auto; background: #ffffff; border: 1px solid #e2e8f0; padding: 32px 36px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); font-family: inherit;">
@@ -155,15 +155,15 @@ $pesan_val = htmlspecialchars($pesan ?? '');
                 <div style="font-size: 13px; line-height: 2; color: #ecfdf5; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 14px;">
                     <div style="margin-bottom: 8px;">
                         <i class="fa fa-map-marker" style="color: #c89a3b; width: 18px;"></i>
-                        <?= htmlspecialchars($data_profil['alamat'] ?? 'Jl. Ciganitri No 2 Cipagalo Bojongsoang, Bandung'); ?>
+                        <?= htmlspecialchars(isset($data_profil['alamat']) ? $data_profil['alamat'] : 'Jl. Ciganitri No 2 Cipagalo Bojongsoang, Bandung'); ?>
                     </div>
                     <div style="margin-bottom: 8px;">
                         <i class="fa fa-phone" style="color: #c89a3b; width: 18px;"></i>
-                        <?= htmlspecialchars($data_profil['telp'] ?? '08119081122'); ?>
+                        <?= htmlspecialchars(isset($data_profil['telp']) ? $data_profil['telp'] : '08119081122'); ?>
                     </div>
                     <div style="margin-bottom: 8px;">
                         <i class="fa fa-envelope-o" style="color: #c89a3b; width: 18px;"></i>
-                        <?= htmlspecialchars($data_profil['email'] ?? 'info@iaipibandung.ac.id'); ?>
+                        <?= htmlspecialchars(isset($data_profil['email']) ? $data_profil['email'] : 'info@iaipibandung.ac.id'); ?>
                     </div>
                     <div style="margin-bottom: 8px;">
                         <i class="fa fa-clock-o" style="color: #c89a3b; width: 18px;"></i>

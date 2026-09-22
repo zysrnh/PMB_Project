@@ -12,12 +12,12 @@ global $koneksi_db;
 $mulai = $akhir = $mulai2 = $akhir2 = $mulai3 = $akhir3 = '';
 $propinsi12xx2x = $koneksi_db->sql_query("SELECT * FROM mod_data_periode WHERE id='1'");
 if ($propinsi12xx2x && ($p11xx2x = $koneksi_db->sql_fetchrow($propinsi12xx2x))) {
-    $mulai = $p11xx2x['mulai'] ?? '';
-    $akhir = $p11xx2x['akhir'] ?? '';
-    $mulai2 = $p11xx2x['mulai2'] ?? '';
-    $akhir2 = $p11xx2x['akhir2'] ?? '';
-    $mulai3 = $p11xx2x['mulai3'] ?? '';
-    $akhir3 = $p11xx2x['akhir3'] ?? '';
+    $mulai = isset($p11xx2x['mulai']) ? $p11xx2x['mulai'] : '';
+    $akhir = isset($p11xx2x['akhir']) ? $p11xx2x['akhir'] : '';
+    $mulai2 = isset($p11xx2x['mulai2']) ? $p11xx2x['mulai2'] : '';
+    $akhir2 = isset($p11xx2x['akhir2']) ? $p11xx2x['akhir2'] : '';
+    $mulai3 = isset($p11xx2x['mulai3']) ? $p11xx2x['mulai3'] : '';
+    $akhir3 = isset($p11xx2x['akhir3']) ? $p11xx2x['akhir3'] : '';
 }
 
 $queryc = $koneksi_db->sql_query("SELECT * FROM mod_data_periode WHERE mulai <= CURDATE() AND akhir >= CURDATE()");
@@ -55,35 +55,35 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    $gel = cleantext($_POST['gel'] ?? $gel_aktif);
-    $prodi = cleantext($_POST['prodi'] ?? '');
-    $sumber = cleantext($_POST['sumber'] ?? 'Class Online');
-    $sumber2 = cleantext($_POST['sumber2'] ?? '');
-    $oleh = cleantext($_POST['oleh'] ?? '');
-    $oleh2 = cleantext($_POST['oleh2'] ?? '');
-    $nama = clean_emoji($_POST['nama'] ?? '');
-    $tempat = clean_emoji($_POST['tempat'] ?? '');
-    $lahir = cleantext($_POST['lahir'] ?? '');
-    $kelamin = cleantext($_POST['kelamin'] ?? '');
-    $nik = cleantext($_POST['nik'] ?? '');
-    $agama = cleantext($_POST['agama'] ?? '');
-    $telp = cleantext($_POST['telp'] ?? '');
-    $email = cleantext($_POST['email'] ?? '');
-    $kwn = cleantext($_POST['kwn'] ?? 'ID');
-    $jenis = cleantext($_POST['jenis'] ?? '1');
+    $gel = cleantext(isset($_POST['gel']) ? $_POST['gel'] : $gel_aktif);
+    $prodi = cleantext(isset($_POST['prodi']) ? $_POST['prodi'] : '');
+    $sumber = cleantext(isset($_POST['sumber']) ? $_POST['sumber'] : 'Class Online');
+    $sumber2 = cleantext(isset($_POST['sumber2']) ? $_POST['sumber2'] : '');
+    $oleh = cleantext(isset($_POST['oleh']) ? $_POST['oleh'] : '');
+    $oleh2 = cleantext(isset($_POST['oleh2']) ? $_POST['oleh2'] : '');
+    $nama = clean_emoji(isset($_POST['nama']) ? $_POST['nama'] : '');
+    $tempat = clean_emoji(isset($_POST['tempat']) ? $_POST['tempat'] : '');
+    $lahir = cleantext(isset($_POST['lahir']) ? $_POST['lahir'] : '');
+    $kelamin = cleantext(isset($_POST['kelamin']) ? $_POST['kelamin'] : '');
+    $nik = cleantext(isset($_POST['nik']) ? $_POST['nik'] : '');
+    $agama = cleantext(isset($_POST['agama']) ? $_POST['agama'] : '');
+    $telp = cleantext(isset($_POST['telp']) ? $_POST['telp'] : '');
+    $email = cleantext(isset($_POST['email']) ? $_POST['email'] : '');
+    $kwn = cleantext(isset($_POST['kwn']) ? $_POST['kwn'] : 'ID');
+    $jenis = cleantext(isset($_POST['jenis']) ? $_POST['jenis'] : '1');
     $tanggal = date('Y-m-d');
-    $prov = cleantext($_POST['prov'] ?? '');
-    $kab = cleantext($_POST['kab'] ?? '');
-    $kec = cleantext($_POST['kec'] ?? '');
-    $kel = cleantext($_POST['kel'] ?? '');
-    $alamat = clean_emoji($_POST['alamat'] ?? '');
-    $kps = cleantext($_POST['kps'] ?? '');
-    $nokps = cleantext($_POST['nokps'] ?? '');
-    $ibu = clean_emoji($_POST['ibu'] ?? '');
-    $nisn = cleantext($_POST['nisn'] ?? '');
-    $rt = cleantext($_POST['rt'] ?? '');
-    $rw = cleantext($_POST['rw'] ?? '');
-    $sekolah = clean_emoji($_POST['sekolah'] ?? '');
+    $prov = cleantext(isset($_POST['prov']) ? $_POST['prov'] : '');
+    $kab = cleantext(isset($_POST['kab']) ? $_POST['kab'] : '');
+    $kec = cleantext(isset($_POST['kec']) ? $_POST['kec'] : '');
+    $kel = cleantext(isset($_POST['kel']) ? $_POST['kel'] : '');
+    $alamat = clean_emoji(isset($_POST['alamat']) ? $_POST['alamat'] : '');
+    $kps = cleantext(isset($_POST['kps']) ? $_POST['kps'] : '');
+    $nokps = cleantext(isset($_POST['nokps']) ? $_POST['nokps'] : '');
+    $ibu = clean_emoji(isset($_POST['ibu']) ? $_POST['ibu'] : '');
+    $nisn = cleantext(isset($_POST['nisn']) ? $_POST['nisn'] : '');
+    $rt = cleantext(isset($_POST['rt']) ? $_POST['rt'] : '');
+    $rw = cleantext(isset($_POST['rw']) ? $_POST['rw'] : '');
+    $sekolah = clean_emoji(isset($_POST['sekolah']) ? $_POST['sekolah'] : '');
     $lahir2 = str_replace("-", "", $lahir);
 
     $prop1xys = $koneksi_db->sql_query("SELECT id FROM mod_data_jumlah ORDER BY id DESC LIMIT 1");
@@ -96,8 +96,8 @@ if (isset($_POST['submit'])) {
     $idkatsx = date('Y');
     $biaya = '250000';
     if ($prop1xysx && ($pr1xysx = $koneksi_db->sql_fetchrow($prop1xysx))) {
-        $idkatsx = $pr1xysx['tahun'] ?? date('Y');
-        $biaya = $pr1xysx['biaya'] ?? '250000';
+        $idkatsx = isset($pr1xysx['tahun']) ? $pr1xysx['tahun'] : date('Y');
+        $biaya = isset($pr1xysx['biaya']) ? $pr1xysx['biaya'] : '250000';
     }
 
     $tahun = $idkatsx;
@@ -286,7 +286,7 @@ if ($propinsi5) {
                 <td style="width: 210px; font-weight: 600; color: #334155; vertical-align: middle;">Nama Lengkap <span style="color: #ef4444;">*</span></td>
                 <td style="width: 15px; text-align: center; color: #64748b;">:</td>
                 <td>
-                    <input type="text" name="nama" required value="<?= htmlspecialchars($_POST['nama'] ?? ''); ?>" placeholder="Masukkan nama lengkap sesuai ijazah/KTP" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
+                    <input type="text" name="nama" required value="<?= htmlspecialchars(isset($_POST['nama']) ? $_POST['nama'] : ''); ?>" placeholder="Masukkan nama lengkap sesuai ijazah/KTP" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                 </td>
             </tr>
 
@@ -294,7 +294,7 @@ if ($propinsi5) {
                 <td style="font-weight: 600; color: #334155; vertical-align: middle;">NIK / No. KTP <span style="color: #ef4444;">*</span></td>
                 <td style="text-align: center; color: #64748b;">:</td>
                 <td>
-                    <input type="text" name="nik" required maxlength="16" value="<?= htmlspecialchars($_POST['nik'] ?? ''); ?>" placeholder="16 digit Nomor Induk Kependudukan" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
+                    <input type="text" name="nik" required maxlength="16" value="<?= htmlspecialchars(isset($_POST['nik']) ? $_POST['nik'] : ''); ?>" placeholder="16 digit Nomor Induk Kependudukan" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                 </td>
             </tr>
 
@@ -302,7 +302,7 @@ if ($propinsi5) {
                 <td style="font-weight: 600; color: #334155; vertical-align: middle;">Tempat Lahir <span style="color: #ef4444;">*</span></td>
                 <td style="text-align: center; color: #64748b;">:</td>
                 <td>
-                    <input type="text" name="tempat" required value="<?= htmlspecialchars($_POST['tempat'] ?? ''); ?>" placeholder="Kota / Kabupaten tempat lahir" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
+                    <input type="text" name="tempat" required value="<?= htmlspecialchars(isset($_POST['tempat']) ? $_POST['tempat'] : ''); ?>" placeholder="Kota / Kabupaten tempat lahir" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                 </td>
             </tr>
 
@@ -310,7 +310,7 @@ if ($propinsi5) {
                 <td style="font-weight: 600; color: #334155; vertical-align: middle;">Tanggal Lahir <span style="color: #ef4444;">*</span></td>
                 <td style="text-align: center; color: #64748b;">:</td>
                 <td>
-                    <input type="date" name="lahir" required value="<?= htmlspecialchars($_POST['lahir'] ?? ''); ?>" placeholder="YYYY-MM-DD" style="width: 100%; max-width: 320px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
+                    <input type="date" name="lahir" required value="<?= htmlspecialchars(isset($_POST['lahir']) ? $_POST['lahir'] : ''); ?>" placeholder="YYYY-MM-DD" style="width: 100%; max-width: 320px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                 </td>
             </tr>
 
@@ -352,7 +352,7 @@ if ($propinsi5) {
                 <td style="font-weight: 600; color: #334155; vertical-align: middle;">Nama Ibu Kandung <span style="color: #ef4444;">*</span></td>
                 <td style="text-align: center; color: #64748b;">:</td>
                 <td>
-                    <input type="text" name="ibu" required value="<?= htmlspecialchars($_POST['ibu'] ?? ''); ?>" placeholder="Nama lengkap ibu kandung" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
+                    <input type="text" name="ibu" required value="<?= htmlspecialchars(isset($_POST['ibu']) ? $_POST['ibu'] : ''); ?>" placeholder="Nama lengkap ibu kandung" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                 </td>
             </tr>
 
@@ -360,7 +360,7 @@ if ($propinsi5) {
                 <td style="font-weight: 600; color: #334155; vertical-align: middle;">Asal Sekolah / PT Asal</td>
                 <td style="text-align: center; color: #64748b;">:</td>
                 <td>
-                    <input type="text" name="sekolah" value="<?= htmlspecialchars($_POST['sekolah'] ?? ''); ?>" placeholder="Nama SMA / SMK / MA / Universitas Asal" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
+                    <input type="text" name="sekolah" value="<?= htmlspecialchars(isset($_POST['sekolah']) ? $_POST['sekolah'] : ''); ?>" placeholder="Nama SMA / SMK / MA / Universitas Asal" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                 </td>
             </tr>
 
@@ -368,7 +368,7 @@ if ($propinsi5) {
                 <td style="font-weight: 600; color: #334155; vertical-align: middle;">NISN (Nomor Induk Siswa Nasional)</td>
                 <td style="text-align: center; color: #64748b;">:</td>
                 <td>
-                    <input type="text" name="nisn" value="<?= htmlspecialchars($_POST['nisn'] ?? ''); ?>" placeholder="10 digit NISN (jika ada)" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
+                    <input type="text" name="nisn" value="<?= htmlspecialchars(isset($_POST['nisn']) ? $_POST['nisn'] : ''); ?>" placeholder="10 digit NISN (jika ada)" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                 </td>
             </tr>
         </table>
@@ -424,10 +424,10 @@ if ($propinsi5) {
                 <td style="font-weight: 600; color: #334155; vertical-align: top; padding-top: 10px;">Alamat Lengkap <span style="color: #ef4444;">*</span></td>
                 <td style="text-align: center; color: #64748b; vertical-align: top; padding-top: 10px;">:</td>
                 <td>
-                    <textarea name="alamat" required rows="3" placeholder="Nama jalan, nomor rumah, RT, RW, dusun/kampung" style="width: 100%; max-width: 540px; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff; font-family: inherit; font-size: 13.5px;"><?= htmlspecialchars($_POST['alamat'] ?? ''); ?></textarea>
+                    <textarea name="alamat" required rows="3" placeholder="Nama jalan, nomor rumah, RT, RW, dusun/kampung" style="width: 100%; max-width: 540px; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff; font-family: inherit; font-size: 13.5px;"><?= htmlspecialchars(isset($_POST['alamat']) ? $_POST['alamat'] : ''); ?></textarea>
                     <div style="margin-top: 8px; display: flex; gap: 10px;">
-                        <input type="text" name="rt" size="5" placeholder="RT" value="<?= htmlspecialchars($_POST['rt'] ?? ''); ?>" style="width: 80px; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 0; outline: none;">
-                        <input type="text" name="rw" size="5" placeholder="RW" value="<?= htmlspecialchars($_POST['rw'] ?? ''); ?>" style="width: 80px; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 0; outline: none;">
+                        <input type="text" name="rt" size="5" placeholder="RT" value="<?= htmlspecialchars(isset($_POST['rt']) ? $_POST['rt'] : ''); ?>" style="width: 80px; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 0; outline: none;">
+                        <input type="text" name="rw" size="5" placeholder="RW" value="<?= htmlspecialchars(isset($_POST['rw']) ? $_POST['rw'] : ''); ?>" style="width: 80px; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 0; outline: none;">
                     </div>
                 </td>
             </tr>
@@ -443,7 +443,7 @@ if ($propinsi5) {
                 <td style="width: 210px; font-weight: 600; color: #334155; vertical-align: middle;">No. WhatsApp / Telepon <span style="color: #ef4444;">*</span></td>
                 <td style="width: 15px; text-align: center; color: #64748b;">:</td>
                 <td>
-                    <input type="text" name="telp" required value="<?= htmlspecialchars($_POST['telp'] ?? ''); ?>" placeholder="Contoh: 081234567890" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
+                    <input type="text" name="telp" required value="<?= htmlspecialchars(isset($_POST['telp']) ? $_POST['telp'] : ''); ?>" placeholder="Contoh: 081234567890" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                 </td>
             </tr>
 
@@ -451,7 +451,7 @@ if ($propinsi5) {
                 <td style="font-weight: 600; color: #334155; vertical-align: middle;">Alamat Email Aktif <span style="color: #ef4444;">*</span></td>
                 <td style="text-align: center; color: #64748b;">:</td>
                 <td>
-                    <input type="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? ''); ?>" placeholder="Contoh: emailanda@gmail.com" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
+                    <input type="email" name="email" required value="<?= htmlspecialchars(isset($_POST['email']) ? $_POST['email'] : ''); ?>" placeholder="Contoh: emailanda@gmail.com" style="width: 100%; max-width: 480px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 0; outline: none; background: #ffffff;">
                 </td>
             </tr>
 

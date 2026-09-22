@@ -1062,12 +1062,9 @@ $data_profil = $koneksi_db->sql_fetchrow($hasil_profil);
 
                         <div class="helpdesk-info-row">
                             <i class="fa fa-phone"></i>
-                            <div><strong>Hotline PMB:</strong> <?= htmlspecialchars($data_profil['telp'] ?? '0811-9081-122'); ?></div>
-                        </div>
-
-                        <div class="helpdesk-info-row">
-                            <i class="fa fa-envelope-o"></i>
-                            <div><strong>Email:</strong> <?= htmlspecialchars($data_profil['email'] ?? 'info@iaipibandung.ac.id'); ?></div>
+                            <div><strong>Hotline PMB:</strong> <?= htmlspecialchars(isset($data_profil['telp']) ? $data_profil['telp'] : '0811-9081-122'); ?></div>
+                            <div style="margin-top: 4px;"><strong>Sekretariat:</strong> <?= htmlspecialchars(isset($data_profil['alamat']) ? $data_profil['alamat'] : 'Jl. Ciganitri No. 2, Cipagalo, Bojongsoang, Kab. Bandung'); ?></div>
+                            <div style="margin-top: 4px;"><strong>Email:</strong> <?= htmlspecialchars(isset($data_profil['email']) ? $data_profil['email'] : 'info@iaipibandung.ac.id'); ?></div>
                         </div>
                     </div>
 

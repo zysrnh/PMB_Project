@@ -5,9 +5,9 @@ define('cms-FUNGSI', true);
 error_reporting(0);
 mysqli_report(MYSQLI_REPORT_OFF);
 
-// Deteksi otomatis environment (Lokal vs Live Hosting cPanel)
-$server_name = $_SERVER['SERVER_NAME'] ?? $_SERVER['HTTP_HOST'] ?? '';
-$is_local = (strpos($server_name, 'localhost') !== false || strpos($server_name, '127.0.0.1') !== false || php_sapi_name() === 'cli-server' || php_sapi_name() === 'cli');
+// Deteksi otomatis environment (Lokal vs Live Hosting cPanel) - Kompatibel PHP 5.6 s/d 8.x
+$server_name = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
+$is_local = (strpos($server_name, 'localhost') !== false || strpos($server_name, '127.0.0.1') !== false || (function_exists('php_sapi_name') && (php_sapi_name() === 'cli-server' || php_sapi_name() === 'cli')));
 
 if ($is_local) {
     // Kredensial Localhost (Laragon / XAMPP)

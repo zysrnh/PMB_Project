@@ -1,7 +1,7 @@
 <?php
 include 'ikutan/config.php';
 include 'ikutan/mysqli.php';
-$propinsi5 = cleartext($_REQUEST['propinsi5'] ?? '');
+$propinsi5 = cleartext(isset($_REQUEST['propinsi5']) ? $_REQUEST['propinsi5'] : '');
 $kota5 = $koneksi_db->sql_query("SELECT id,nama_kabkota FROM kabkota WHERE provinsi_id='$propinsi5' ORDER BY id ASC");
 echo "<option value=\"\">-- Pilih Kota/Kabupaten --</option>\n";
 if ($kota5) {

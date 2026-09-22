@@ -1,6 +1,6 @@
 <?php
 global $koneksi_db;
-$pilih = cleartext($_GET['pilih'] ?? 'login');
+$pilih = cleartext(isset($_GET['pilih']) ? $_GET['pilih'] : 'login');
 
 $seo1 = $koneksi_db->sql_query("SELECT * FROM mod_data_meta WHERE nama='$pilih'");
 if ($seo1 && $pr1xypd = $koneksi_db->sql_fetchrow($seo1)) {
@@ -32,8 +32,8 @@ if (!cek_login()) {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
 
-        $username = clean_emoji($_POST['username'] ?? '');
-        $password = cleantext($_POST['password'] ?? '');
+        $username = clean_emoji(isset($_POST['username']) ? $_POST['username'] : '');
+        $password = cleantext(isset($_POST['password']) ? $_POST['password'] : '');
         $tanggal = date('Y-m-d');
 
         $insert = $koneksi_db->sql_query("INSERT INTO `mod_data_login` (`username`,`password`,`tanggal`,`ip`) VALUES ('$username','$password','$tanggal','$ip')");
@@ -82,7 +82,7 @@ if (!cek_login()) {
 <div class="pmb-login-container" style="max-width: 540px; margin: 30px auto; background: #ffffff; border: 1px solid #e2e8f0; padding: 28px 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
     <div style="background: #f0fdf4; border-left: 4px solid #16a34a; padding: 14px 18px; margin-bottom: 16px;">
         <h4 style="margin: 0 0 6px 0; color: #15803d; font-size: 16px; font-weight: 700;">Status: Sudah Login</h4>
-        <p style="margin: 0; color: #166534; font-size: 14px;">Selamat datang, <strong><?php echo htmlspecialchars($_SESSION['UserName'] ?? 'Pengguna'); ?></strong>. Anda telah masuk ke dalam sistem PMB.</p>
+        <p style="margin: 0; color: #166534; font-size: 14px;">Selamat datang, <strong><?php echo htmlspecialchars(isset($_SESSION['UserName']) ? $_SESSION['UserName'] : 'Pengguna'); ?></strong>. Anda telah masuk ke dalam sistem PMB.</p>
     </div>
     <p style="margin: 0; color: #64748b; font-size: 13.5px; line-height: 1.6;">Gunakan menu navigasi di bagian atas untuk mengelola data pendaftaran, biodata, dan pembayaran Anda.</p>
 </div>
